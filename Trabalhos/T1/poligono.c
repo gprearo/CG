@@ -14,6 +14,8 @@ void addVertice(poligono *p, int x, int y) {
 		p->inicio = v ;
 	}
 	v->p = p->fim ;
+	v->x = x ;
+	v->y = y ;
 	p->fim = v ;
 	p->qnt++ ;
 	
