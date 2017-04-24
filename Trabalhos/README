@@ -8,3 +8,7 @@ libglu1-mesa-dev
 libgl1-mesa-glx
 libgl1-mesa-dev
 
+Para rodar o GTK (no Fedora):
+gtk3-devel
+gtkglext-devel
+glew-devel

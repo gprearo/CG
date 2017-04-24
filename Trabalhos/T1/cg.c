@@ -4,88 +4,52 @@
 #include <GL/glew.h>
 #include <GL/glut.h>
 
+#include <gtk/gtk.h>
+
 #include "poligono.h"
 
 #define HEIGHT 400
-#define WIDTH 400 
+#define WIDTH 400
 
 poligono p ;
 
-//OpenGL Stuff
-void update_fade_factor(void) {}
+static gboolean render (GtkGLArea *area, GdkGLContext *context) {
+  // inside this function it's safe to use GL; the given
+  // #GdkGLContext has been made current to the drawable
+  // surface used by the #GtkGLArea and the viewport has
+  // already been set to be the size of the allocation
+  glClearColor (0, 0, 0, 0);
+  glClear (GL_COLOR_BUFFER_BIT);
 
-void render(void) {
-	//Não sei
-	//OpenGL Stuff
-	glClearColor(1.0f, 1.0f, 1.0f, 1.0f) ;
-	glClear(GL_COLOR_BUFFER_BIT) ;
-
-	glutSwapBuffers() ;
-
+  return TRUE;
 }
 
-void mouseClick(int button, int state, int x, int y) {
-	//Se o clique for com o botão esquerdo, grava o pixelque foi clicado na
-	//estrutura de dados do poligono, imprime as coordenadas, colore o ponto
-	//que foi clicado e cria uma reta com o ponto anterior, se existente
-	if (button == GLUT_LEFT_BUTTON && state == GLUT_UP) {
-		printf("x: %d, y: %d\n", x, y) ;
-		glBegin(GL_POINTS) ;
-		glColor3i(255, 0, 0) ;
-		glVertex2i(x, HEIGHT - y) ;
-		glEnd();
-		if (p.inicio) {
-			glBegin(GL_LINES) ;
-			glColor3i(255, 0, 0) ;
-			glVertex2i(x, HEIGHT - y) ;
-			glVertex2i(p.fim->x, HEIGHT - p.fim->y) ;
-			glEnd();
-		} 
-		glFlush() ;
-		addVertice(&p, x, y) ;	
-	} else {
-		//Se for clicado com o botão direito, fecha o polígono
-		if (button == GLUT_RIGHT_BUTTON && state == GLUT_UP) {
-			glBegin(GL_LINES) ;
-			glVertex2i(p.inicio->x, HEIGHT - p.inicio->y) ;
-			glVertex2i(p.fim->x, HEIGHT - p.fim->y) ;
-			glEnd() ;
-			glFlush() ;
+static void activate(GtkApplication *app) {
+  GtkWidget *window;
+  GtkWidget *gl_area;
 
-		}
-	}
+  window = gtk_application_window_new (app);
+  gtk_window_set_title (GTK_WINDOW (window), "Hello Window");
+  gtk_window_set_default_size (GTK_WINDOW (window), WIDTH, HEIGHT);
+
+  gl_area = gtk_gl_area_new();
+  g_signal_connect (gl_area, "render", G_CALLBACK (render), NULL);
+  gtk_container_add (GTK_CONTAINER(window), gl_area);
+
+  gtk_widget_show_all (window);
 }
 
-
-//Inicializa a janela
-//OpenGL Stuff
-void initWindow(int argc, char **argv) {
-
-	glutInit(&argc, argv) ;
-	glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE) ;
-	glutInitWindowSize(WIDTH, HEIGHT) ;
-	glutCreateWindow("Hello World") ;
-	glutDisplayFunc(&render) ;
-	glutIdleFunc(&update_fade_factor) ;
-	glMatrixMode(GL_PROJECTION);
-	glEnable(GL_BLEND) ;
-	glViewport( 0,0, WIDTH, HEIGHT);
-	glMatrixMode( GL_PROJECTION );
-	glLoadIdentity();
-	glOrtho( 0.0, WIDTH, 0.0, HEIGHT, 1.0, -1.0 );
-	//Define a função que trata o click do mouse
-	glutMouseFunc(mouseClick);
-	glewInit() ;
-	glutMainLoop() ;
-
-}
 
 int main(int argc, char **argv)  {
-	initWindow(argc, argv) ;
+//	initPoligono(&p) ;
 
-	initPoligono(&p) ;
+    GtkApplication *app;
+    int status;
 
+    app = gtk_application_new ("org.gtk.example", G_APPLICATION_FLAGS_NONE);
+    g_signal_connect (app, "activate", G_CALLBACK (activate), NULL);
+    status = g_application_run (G_APPLICATION (app), argc, argv);
+    g_object_unref (app);
 
-	return 0 ;
-	
+    return status;
 }
