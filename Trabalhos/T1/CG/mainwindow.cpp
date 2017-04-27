@@ -2,7 +2,9 @@
 #include <QtWidgets>
 
 MainWindow::MainWindow() {
-    resize(400, 600);
+    height = 500 ;
+    width = 400 ;
+    resize(width, height);
     gl = new GLBox(this);
     this->setCentralWidget(gl);
 

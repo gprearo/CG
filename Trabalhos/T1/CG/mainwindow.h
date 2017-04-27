@@ -8,6 +8,8 @@ class MainWindow : public QMainWindow { Q_OBJECT
 public:
     MainWindow();
     void draw();
+    int height  ;
+    int width ;
 private:
     GLBox *gl;
 

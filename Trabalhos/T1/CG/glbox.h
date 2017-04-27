@@ -3,6 +3,8 @@
 
 #include <QOpenGLWidget>
 #include <QOpenGLFunctions>
+#include <QPolygon>
+#include <QMouseEvent>
 
 class GLBox : public QOpenGLWidget, public QOpenGLFunctions{
 public:
@@ -10,8 +12,11 @@ public:
 
     void draw();
     QPolygon poly;
+    int height ;
+    int width ;
 
 protected:
+
     void initializeGL();
 
     void resizeGL(int width, int height);
