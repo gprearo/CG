@@ -15,7 +15,7 @@ CXX           = g++
 DEFINES       = -DQT_QML_DEBUG -DQT_OPENGL_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g -Wall -W -D_REENTRANT -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -g -std=gnu++11 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
-INCPATH       = -I../CG -I. -I/home/gprearo/Qt/5.8/gcc_64/include -I/home/gprearo/Qt/5.8/gcc_64/include/QtOpenGL -I/home/gprearo/Qt/5.8/gcc_64/include/QtWidgets -I/home/gprearo/Qt/5.8/gcc_64/include/QtGui -I/home/gprearo/Qt/5.8/gcc_64/include/QtCore -I. -isystem /usr/include/libdrm -I/home/gprearo/Qt/5.8/gcc_64/mkspecs/linux-g++
+INCPATH       = -I../CG -I. -I/home/gprearo/Qt/5.8/gcc_64/include -I/home/gprearo/Qt/5.8/gcc_64/include/QtOpenGL -I/home/gprearo/Qt/5.8/gcc_64/include/QtWidgets -I/home/gprearo/Qt/5.8/gcc_64/include/QtGui -I/home/gprearo/Qt/5.8/gcc_64/include/QtCore -I. -isystem /usr/include/libdrm -I. -I/home/gprearo/Qt/5.8/gcc_64/mkspecs/linux-g++
 QMAKE         = /home/gprearo/Qt/5.8/gcc_64/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -50,11 +50,15 @@ OBJECTS_DIR   = ./
 
 SOURCES       = ../CG/main.cpp \
 		../CG/mainwindow.cpp \
-		../CG/glbox.cpp moc_mainwindow.cpp
+		../CG/glbox.cpp \
+		../CG/principal.cpp moc_mainwindow.cpp \
+		moc_principal.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
 		glbox.o \
-		moc_mainwindow.o
+		principal.o \
+		moc_mainwindow.o \
+		moc_principal.o
 DIST          = /home/gprearo/Qt/5.8/gcc_64/mkspecs/features/spec_pre.prf \
 		/home/gprearo/Qt/5.8/gcc_64/mkspecs/common/unix.conf \
 		/home/gprearo/Qt/5.8/gcc_64/mkspecs/common/linux.conf \
@@ -205,6 +209,7 @@ DIST          = /home/gprearo/Qt/5.8/gcc_64/mkspecs/features/spec_pre.prf \
 		/home/gprearo/Qt/5.8/gcc_64/mkspecs/features/qt_config.prf \
 		/home/gprearo/Qt/5.8/gcc_64/mkspecs/linux-g++/qmake.conf \
 		/home/gprearo/Qt/5.8/gcc_64/mkspecs/features/spec_post.prf \
+		../CG/.qmake.stash \
 		/home/gprearo/Qt/5.8/gcc_64/mkspecs/features/exclusive_builds.prf \
 		/home/gprearo/Qt/5.8/gcc_64/mkspecs/features/toolchain.prf \
 		/home/gprearo/Qt/5.8/gcc_64/mkspecs/features/default_pre.prf \
@@ -225,9 +230,11 @@ DIST          = /home/gprearo/Qt/5.8/gcc_64/mkspecs/features/spec_pre.prf \
 		/home/gprearo/Qt/5.8/gcc_64/mkspecs/features/yacc.prf \
 		/home/gprearo/Qt/5.8/gcc_64/mkspecs/features/lex.prf \
 		../CG/CG.pro ../CG/mainwindow.h \
-		../CG/glbox.h ../CG/main.cpp \
+		../CG/glbox.h \
+		../CG/principal.h ../CG/main.cpp \
 		../CG/mainwindow.cpp \
-		../CG/glbox.cpp
+		../CG/glbox.cpp \
+		../CG/principal.cpp
 QMAKE_TARGET  = CG
 DESTDIR       = 
 TARGET        = CG
@@ -236,7 +243,7 @@ TARGET        = CG
 first: all
 ####### Build rules
 
-$(TARGET):  $(OBJECTS)  
+$(TARGET): ui_principal.h $(OBJECTS)  
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
 Makefile: ../CG/CG.pro /home/gprearo/Qt/5.8/gcc_64/mkspecs/linux-g++/qmake.conf /home/gprearo/Qt/5.8/gcc_64/mkspecs/features/spec_pre.prf \
@@ -389,6 +396,7 @@ Makefile: ../CG/CG.pro /home/gprearo/Qt/5.8/gcc_64/mkspecs/linux-g++/qmake.conf 
 		/home/gprearo/Qt/5.8/gcc_64/mkspecs/features/qt_config.prf \
 		/home/gprearo/Qt/5.8/gcc_64/mkspecs/linux-g++/qmake.conf \
 		/home/gprearo/Qt/5.8/gcc_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/home/gprearo/Qt/5.8/gcc_64/mkspecs/features/exclusive_builds.prf \
 		/home/gprearo/Qt/5.8/gcc_64/mkspecs/features/toolchain.prf \
 		/home/gprearo/Qt/5.8/gcc_64/mkspecs/features/default_pre.prf \
@@ -564,6 +572,7 @@ Makefile: ../CG/CG.pro /home/gprearo/Qt/5.8/gcc_64/mkspecs/linux-g++/qmake.conf 
 /home/gprearo/Qt/5.8/gcc_64/mkspecs/features/qt_config.prf:
 /home/gprearo/Qt/5.8/gcc_64/mkspecs/linux-g++/qmake.conf:
 /home/gprearo/Qt/5.8/gcc_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /home/gprearo/Qt/5.8/gcc_64/mkspecs/features/exclusive_builds.prf:
 /home/gprearo/Qt/5.8/gcc_64/mkspecs/features/toolchain.prf:
 /home/gprearo/Qt/5.8/gcc_64/mkspecs/features/default_pre.prf:
@@ -603,8 +612,9 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /home/gprearo/Qt/5.8/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../CG/mainwindow.h ../CG/glbox.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../CG/main.cpp ../CG/mainwindow.cpp ../CG/glbox.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../CG/mainwindow.h ../CG/glbox.h ../CG/principal.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../CG/main.cpp ../CG/mainwindow.cpp ../CG/glbox.cpp ../CG/principal.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../CG/principal.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -636,9 +646,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /home/gprearo/Qt/5.8/gcc_64/mkspecs/features/data/dummy.cpp
 	g++ -pipe -g -std=gnu++11 -Wall -W -dM -E -o moc_predefs.h /home/gprearo/Qt/5.8/gcc_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_mainwindow.cpp
+compiler_moc_header_make_all: moc_mainwindow.cpp moc_principal.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainwindow.cpp
+	-$(DEL_FILE) moc_mainwindow.cpp moc_principal.cpp
 moc_mainwindow.cpp: /home/gprearo/Qt/5.8/gcc_64/include/QtWidgets/QMainWindow \
 		/home/gprearo/Qt/5.8/gcc_64/include/QtWidgets/qmainwindow.h \
 		/home/gprearo/Qt/5.8/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
@@ -759,22 +769,138 @@ moc_mainwindow.cpp: /home/gprearo/Qt/5.8/gcc_64/include/QtWidgets/QMainWindow \
 		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/QObject \
 		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/QScopedPointer \
 		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qopenglversionfunctions.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/QPolygon \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/QMouseEvent \
 		../CG/mainwindow.h \
 		moc_predefs.h \
 		/home/gprearo/Qt/5.8/gcc_64/bin/moc
 	/home/gprearo/Qt/5.8/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/gprearo/Qt/5.8/gcc_64/mkspecs/linux-g++ -I'/home/gprearo/Documents/USP/7 Semestre/CG/Trabalhos/T1/CG' -I/home/gprearo/Qt/5.8/gcc_64/include -I/home/gprearo/Qt/5.8/gcc_64/include/QtOpenGL -I/home/gprearo/Qt/5.8/gcc_64/include/QtWidgets -I/home/gprearo/Qt/5.8/gcc_64/include/QtGui -I/home/gprearo/Qt/5.8/gcc_64/include/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../CG/mainwindow.h -o moc_mainwindow.cpp
 
+moc_principal.cpp: /home/gprearo/Qt/5.8/gcc_64/include/QtWidgets/QMainWindow \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtWidgets/qmainwindow.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qtguiglobal.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qglobal.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qconfig-bootstrapped.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qconfig.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qtcore-config.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qsystemdetection.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qprocessordetection.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qcompilerdetection.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qtypeinfo.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qsysinfo.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qlogging.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qflags.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qtypetraits.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qatomic.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qbasicatomic.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qgenericatomic.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qatomic_cxx11.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qatomic_msvc.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qglobalstatic.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qmutex.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qnumeric.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qversiontagging.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qtgui-config.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtWidgets/qtwidgets-config.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtWidgets/qwidget.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qwindowdefs.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qobjectdefs.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qnamespace.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qwindowdefs_win.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qobject.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qstring.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qchar.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qbytearray.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qrefcount.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qarraydata.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qstringbuilder.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qlist.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qalgorithms.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qiterator.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qhashfunctions.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qpair.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qbytearraylist.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qstringlist.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qregexp.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qstringmatcher.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qcoreevent.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qscopedpointer.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qmetatype.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qvarlengtharray.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qcontainerfwd.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qobject_impl.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qmargins.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qpaintdevice.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qrect.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qsize.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qpoint.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qpalette.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qcolor.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qrgb.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qrgba64.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qbrush.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qvector.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qmatrix.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qpolygon.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qregion.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qdatastream.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qiodevice.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qline.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qtransform.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qpainterpath.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qimage.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qpixelformat.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qpixmap.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qsharedpointer.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qshareddata.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qhash.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qfont.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qfontmetrics.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qfontinfo.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtWidgets/qsizepolicy.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qcursor.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qkeysequence.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qevent.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qvariant.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qmap.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qdebug.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qtextstream.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qlocale.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qset.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qcontiguouscache.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qurl.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qurlquery.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qfile.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qfiledevice.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qvector2d.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qtouchdevice.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtWidgets/qtabwidget.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qicon.h \
+		../CG/principal.h \
+		moc_predefs.h \
+		/home/gprearo/Qt/5.8/gcc_64/bin/moc
+	/home/gprearo/Qt/5.8/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/gprearo/Qt/5.8/gcc_64/mkspecs/linux-g++ -I'/home/gprearo/Documents/USP/7 Semestre/CG/Trabalhos/T1/CG' -I/home/gprearo/Qt/5.8/gcc_64/include -I/home/gprearo/Qt/5.8/gcc_64/include/QtOpenGL -I/home/gprearo/Qt/5.8/gcc_64/include/QtWidgets -I/home/gprearo/Qt/5.8/gcc_64/include/QtGui -I/home/gprearo/Qt/5.8/gcc_64/include/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../CG/principal.h -o moc_principal.cpp
+
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all:
+compiler_uic_make_all: ui_principal.h
 compiler_uic_clean:
+	-$(DEL_FILE) ui_principal.h
+ui_principal.h: ../CG/principal.ui \
+		/home/gprearo/Qt/5.8/gcc_64/bin/uic
+	/home/gprearo/Qt/5.8/gcc_64/bin/uic ../CG/principal.ui -o ui_principal.h
+
 compiler_yacc_decl_make_all:
 compiler_yacc_decl_clean:
 compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean 
+compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
 
 ####### Compile
 
@@ -905,7 +1031,9 @@ main.o: ../CG/main.cpp /home/gprearo/Qt/5.8/gcc_64/include/QtWidgets/QApplicatio
 		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qopenglcontext.h \
 		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/QObject \
 		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/QScopedPointer \
-		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qopenglversionfunctions.h
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qopenglversionfunctions.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/QPolygon \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/QMouseEvent
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../CG/main.cpp
 
 mainwindow.o: ../CG/mainwindow.cpp ../CG/mainwindow.h \
@@ -1029,6 +1157,8 @@ mainwindow.o: ../CG/mainwindow.cpp ../CG/mainwindow.h \
 		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/QObject \
 		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/QScopedPointer \
 		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qopenglversionfunctions.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/QPolygon \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/QMouseEvent \
 		/home/gprearo/Qt/5.8/gcc_64/include/QtWidgets/QtWidgets \
 		/home/gprearo/Qt/5.8/gcc_64/include/QtWidgets/QtWidgetsDepends \
 		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/QtCore \
@@ -1477,11 +1607,124 @@ glbox.o: ../CG/glbox.cpp ../CG/glbox.h \
 		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qopenglcontext.h \
 		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/QObject \
 		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/QScopedPointer \
-		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qopenglversionfunctions.h
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qopenglversionfunctions.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/QPolygon \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/QMouseEvent
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o glbox.o ../CG/glbox.cpp
+
+principal.o: ../CG/principal.cpp ../CG/principal.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtWidgets/QMainWindow \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtWidgets/qmainwindow.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qtguiglobal.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qglobal.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qconfig-bootstrapped.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qconfig.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qtcore-config.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qsystemdetection.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qprocessordetection.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qcompilerdetection.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qtypeinfo.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qsysinfo.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qlogging.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qflags.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qtypetraits.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qatomic.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qbasicatomic.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qgenericatomic.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qatomic_cxx11.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qatomic_msvc.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qglobalstatic.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qmutex.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qnumeric.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qversiontagging.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qtgui-config.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtWidgets/qtwidgets-config.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtWidgets/qwidget.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qwindowdefs.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qobjectdefs.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qnamespace.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qwindowdefs_win.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qobject.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qstring.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qchar.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qbytearray.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qrefcount.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qarraydata.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qstringbuilder.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qlist.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qalgorithms.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qiterator.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qhashfunctions.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qpair.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qbytearraylist.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qstringlist.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qregexp.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qstringmatcher.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qcoreevent.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qscopedpointer.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qmetatype.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qvarlengtharray.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qcontainerfwd.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qobject_impl.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qmargins.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qpaintdevice.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qrect.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qsize.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qpoint.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qpalette.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qcolor.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qrgb.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qrgba64.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qbrush.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qvector.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qmatrix.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qpolygon.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qregion.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qdatastream.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qiodevice.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qline.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qtransform.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qpainterpath.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qimage.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qpixelformat.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qpixmap.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qsharedpointer.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qshareddata.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qhash.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qfont.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qfontmetrics.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qfontinfo.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtWidgets/qsizepolicy.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qcursor.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qkeysequence.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qevent.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qvariant.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qmap.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qdebug.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qtextstream.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qlocale.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qset.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qcontiguouscache.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qurl.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qurlquery.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qfile.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtCore/qfiledevice.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qvector2d.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qtouchdevice.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtWidgets/qtabwidget.h \
+		/home/gprearo/Qt/5.8/gcc_64/include/QtGui/qicon.h \
+		ui_principal.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o principal.o ../CG/principal.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
+
+moc_principal.o: moc_principal.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_principal.o moc_principal.cpp
 
 ####### Install
 

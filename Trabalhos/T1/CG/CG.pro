@@ -12,8 +12,13 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
     mainwindow.cpp \
-    glbox.cpp
+    glbox.cpp \
+    principal.cpp
 
 HEADERS += \
     mainwindow.h \
-    glbox.h
+    glbox.h \
+    principal.h
+
+FORMS += \
+    principal.ui

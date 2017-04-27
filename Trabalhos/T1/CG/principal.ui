@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Principal</class>
+ <widget class="QMainWindow" name="Principal">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>640</width>
+    <height>480</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QOpenGLWidget" name="openGLWidget">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>50</y>
+      <width>621</width>
+      <height>331</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>640</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuPreenchimento_de_pol_gonos">
+    <property name="title">
+     <string>Cores</string>
+    </property>
+    <addaction name="actionCor_da_linha"/>
+    <addaction name="actionCor_de_fundo"/>
+   </widget>
+   <widget class="QMenu" name="menuM_todos_de_preenchimento">
+    <property name="title">
+     <string>Preencher</string>
+    </property>
+    <addaction name="actionTabela_de_lados"/>
+    <addaction name="actionTabela_de_lados_ativos"/>
+   </widget>
+   <addaction name="menuPreenchimento_de_pol_gonos"/>
+   <addaction name="menuM_todos_de_preenchimento"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionCor_da_linha">
+   <property name="text">
+    <string>Cor da linha</string>
+   </property>
+  </action>
+  <action name="actionCor_de_fundo">
+   <property name="text">
+    <string>Cor de fundo</string>
+   </property>
+  </action>
+  <action name="actionTabela_de_lados">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Tabela de lados</string>
+   </property>
+  </action>
+  <action name="actionTabela_de_lados_ativos">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Tabela de lados ativos</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

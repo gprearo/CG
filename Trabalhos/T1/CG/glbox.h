@@ -5,6 +5,7 @@
 #include <QOpenGLFunctions>
 #include <QPolygon>
 #include <QMouseEvent>
+#include <QColor>
 
 class GLBox : public QOpenGLWidget, public QOpenGLFunctions{
 public:
@@ -12,10 +13,16 @@ public:
 
     void draw();
     QPolygon poly;
-    int height ;
-    int width ;
+    int height = 300;
+    int width = 600;
+
+    void setBgColor(QColor c) ;
+    void setFgColor(QColor c) ;
 
 protected:
+    QColor bgColor;
+    QColor fgColor ;
+
 
     void initializeGL();
 
@@ -23,6 +30,10 @@ protected:
 
     void paintGL();
 
+    void clearBg(QColor c) ;
+    void changeFg(QColor c) ;
+
+    void drawPolygon() ;
 private:
     void mousePressEvent(QMouseEvent *event);
 };
