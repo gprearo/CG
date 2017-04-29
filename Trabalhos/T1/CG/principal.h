@@ -28,6 +28,8 @@ private slots:
 
     void on_actionCor_da_linha_triggered();
 
+    void on_actionCor_de_fundo_triggered();
+
 private:
     Ui::Principal *ui;
 

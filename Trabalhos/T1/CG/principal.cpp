@@ -35,3 +35,9 @@ void Principal::on_actionCor_da_linha_triggered()
     QColor color = QColorDialog::getColor(Qt::yellow, this );
     gl->setFgColor(color);
 }
+
+void Principal::on_actionCor_de_fundo_triggered()
+{
+    QColor color = QColorDialog::getColor(Qt::yellow, this );
+    gl->setBgColor(color);
+}

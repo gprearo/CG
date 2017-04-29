@@ -5,12 +5,13 @@ void GLBox::clearBg(QColor c) {
     qreal r,  g, b ;
     c.getRgbF(&r, &g, &b, NULL);
     glClearColor(r, g, b, 1.0f);
+    glFlush();
 }
 
 void GLBox::changeFg(QColor c) {
-    int r,  g, b ;
-    c.getRgb(&r, &g, &b, NULL);
-    glColor3i(r, g, b);
+    qreal r,  g, b ;
+    c.getRgbF(&r, &g, &b, NULL);
+    glColor3f(r, g, b);
     std::cout << r << ", " << g << " , " << b << "\n" ;
 }
 
@@ -18,12 +19,14 @@ void GLBox::setBgColor(QColor c) {
     bgColor = c ;
     clearBg(bgColor);
     changeFg(fgColor);
+    this->draw() ;
 }
 
 void GLBox::setFgColor(QColor c) {
     fgColor = c ;
     clearBg(bgColor);
     changeFg(fgColor);
+    draw();
     std::cout << c.name().toStdString() ;
 }
 
@@ -33,7 +36,7 @@ void GLBox::initializeGL() {
     makeCurrent();
     initializeOpenGLFunctions();
 
-    fgColor = QColor(0, 0, 0, 255) ;
+    fgColor = QColor(255, 0, 0, 255) ;
     bgColor = QColor(255, 255, 255, 255);
 
     clearBg(bgColor);
@@ -66,7 +69,6 @@ void GLBox::drawPolygon() {
     // Draw QPolygon
     for(int i = 0; i < poly.size(); i++) {
         QPointF vertex = poly.point(i);
-        glColor4i(255, 0, 0, 255);
         glVertex2i(vertex.x(), vertex.y());
         std::cout << poly.size() << ", " << vertex.x() << ", " << vertex.y() << std::endl;
     }
@@ -80,7 +82,7 @@ void GLBox::paintGL() {
 
 void GLBox::draw() {
 
-this->update();
+    this->update();
 
 }
 
