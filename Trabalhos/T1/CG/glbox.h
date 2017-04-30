@@ -9,6 +9,7 @@
 
 #define DRAW_VERTEX 0
 #define DRAW_POLYGON 1
+#define FILL_POLYGON 2
 
 class GLBox : public QOpenGLWidget, public QOpenGLFunctions{
 public:

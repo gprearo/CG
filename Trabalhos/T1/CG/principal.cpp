@@ -61,6 +61,6 @@ void Principal::on_pushButton_Polyg_2_clicked()
 
 void Principal::on_pushButton_Polyg_3_clicked()
 {
-    gl->preencher();
+    gl->type = 2;
     gl->draw();
 }

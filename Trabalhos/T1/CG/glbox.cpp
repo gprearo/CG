@@ -59,7 +59,9 @@ void GLBox::drawPixel(int x, int y) {
     draw();
 }
 
-void GLBox::preencher() {
+void GLBox::preencher() {   
+    std::cout << "preencher()" << std::endl;
+    glClear(GL_COLOR_BUFFER_BIT);
     ActiveEdgeTable aet = ActiveEdgeTable(this->poly) ;
 
     aet.print() ;
@@ -172,6 +174,8 @@ void GLBox::paintGL() {
         drawVertex();
     else if(type == DRAW_POLYGON)
         drawPolygon();
+    else if(type == FILL_POLYGON)
+        preencher();
     else
         std::cout << "paintGL(): Invalid type!" << std::endl;
 }

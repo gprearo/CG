@@ -27,13 +27,14 @@ void EdgeTable::addEdge(Edge e) {
     y.replace(e.ymin, l);
 }
 
-void EdgeTable::addEdges(QPolygon p){
-
+void EdgeTable::addEdges(QPolygon p) {
     for (int i= 0; i < p.size() - 1; i++) {
         this->addEdge(Edge(p.at(i), p.at(i+1)));
     }
 
-    this->addEdge(Edge(p.at(p.size()-1), p.at(0)));
+    if(p.size() > 2) {
+        this->addEdge(Edge(p.at(p.size()-1), p.at(0)));
+    }
 }
 
 void EdgeTable::print() {
@@ -45,7 +46,10 @@ void EdgeTable::print() {
         std::cout << "\nLinha " << i << ":" ;
         if (!y.at(i).isEmpty()) {
             for (int j = 0; j < y.at(i).size(); j++) {
+                std::cout << " ymin: " << y.at(i).at(j).ymin << "\n" ;
                 std::cout << " xmin: " << y.at(i).at(j).xmin << "\n" ;
+                std::cout << " ymax: " << y.at(i).at(j).ymax << "\n" ;
+                std::cout << " xmax: " << y.at(i).at(j).xmax << "\n" ;
             }
         }
     }

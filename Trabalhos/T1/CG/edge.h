@@ -8,7 +8,7 @@ class Edge
 public:
     Edge(QPoint p1, QPoint p2);
 
-    int ymin, xmin, ymax ;
+    int ymin, xmin, ymax, xmax;
 
     //inclinação inversa (dx/dy)
     int numerador ;

@@ -5,8 +5,7 @@
 #include <QPolygon>
 #include <QVector>
 
-class EdgeTable
-{
+class EdgeTable {
 public:
     EdgeTable();
 

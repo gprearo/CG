@@ -7,8 +7,7 @@ ActiveEdgeTable::ActiveEdgeTable(EdgeTable et)
 }
 
 
-ActiveEdgeTable::ActiveEdgeTable(QPolygon p)
-{
+ActiveEdgeTable::ActiveEdgeTable(QPolygon p) {
     this->et = EdgeTable() ;
     this->et.addEdges(p);
 }
