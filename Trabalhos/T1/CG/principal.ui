@@ -24,6 +24,32 @@
      </rect>
     </property>
    </widget>
+   <widget class="QPushButton" name="pushButton_Point">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>10</y>
+      <width>90</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Pontos</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_Polyg">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>10</y>
+      <width>90</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Polígono</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -31,12 +57,12 @@
      <x>0</x>
      <y>0</y>
      <width>640</width>
-     <height>22</height>
+     <height>27</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuPreenchimento_de_pol_gonos">
     <property name="title">
-     <string>Cores</string>
+     <string>&amp;Cores</string>
     </property>
     <addaction name="actionCor_da_linha"/>
     <addaction name="actionCor_de_fundo"/>
@@ -54,12 +80,12 @@
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionCor_da_linha">
    <property name="text">
-    <string>Cor da linha</string>
+    <string>&amp;Cor da linha</string>
    </property>
   </action>
   <action name="actionCor_de_fundo">
    <property name="text">
-    <string>Cor de fundo</string>
+    <string>Cor &amp;de fundo</string>
    </property>
   </action>
   <action name="actionTabela_de_lados">
@@ -67,7 +93,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Tabela de lados</string>
+    <string>&amp;Tabela de lados</string>
    </property>
   </action>
   <action name="actionTabela_de_lados_ativos">
@@ -75,7 +101,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Tabela de lados ativos</string>
+    <string>Tabela &amp;de lados ativos</string>
    </property>
   </action>
  </widget>

@@ -30,6 +30,10 @@ private slots:
 
     void on_actionCor_de_fundo_triggered();
 
+    void on_pushButton_Point_clicked();
+
+    void on_pushButton_Polyg_clicked();
+
 private:
     Ui::Principal *ui;
 

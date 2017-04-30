@@ -2,7 +2,9 @@ QT += core gui widgets
 QT += opengl
 QT += widgets
 
-CONFIG += c++11
+CONFIG += c++11 -lglut
+
+LIBS += -lglut
 
 TARGET = CG
 CONFIG += console
@@ -11,12 +13,10 @@ CONFIG -= app_bundle
 TEMPLATE = app
 
 SOURCES += main.cpp \
-    mainwindow.cpp \
     glbox.cpp \
     principal.cpp
 
 HEADERS += \
-    mainwindow.h \
     glbox.h \
     principal.h
 

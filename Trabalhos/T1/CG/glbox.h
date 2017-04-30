@@ -7,21 +7,28 @@
 #include <QMouseEvent>
 #include <QColor>
 
+#define DRAW_VERTEX 0
+#define DRAW_POLYGON 1
+
 class GLBox : public QOpenGLWidget, public QOpenGLFunctions{
 public:
-    GLBox(QWidget *parent) : QOpenGLWidget(parent) { }
+    GLBox(QWidget *parent) : QOpenGLWidget(parent) {type = DRAW_VERTEX; }
 
     void draw();
     QPolygon poly;
     int height = 300;
     int width = 600;
 
-    void setBgColor(QColor c) ;
-    void setFgColor(QColor c) ;
+    void setBgColor(QColor c);
+    void setFgColor(QColor c);
+
+    short type;
 
 protected:
     QColor bgColor;
     QColor fgColor ;
+
+    QList<QPoint> vPoints;
 
 
     void initializeGL();
@@ -33,6 +40,7 @@ protected:
     void clearBg(QColor c) ;
     void changeFg(QColor c) ;
 
+    void drawVertex();
     void drawPolygon() ;
 private:
     void mousePressEvent(QMouseEvent *event);
