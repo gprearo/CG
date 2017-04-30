@@ -1,4 +1,5 @@
 #include "activeedgetable.h"
+#include <iostream>
 
 ActiveEdgeTable::ActiveEdgeTable(EdgeTable et)
 {
@@ -41,9 +42,15 @@ int ActiveEdgeTable::incY() {
             continue ;
         }
 
-        e.incremento += e.numerador ;
+        int sinal = 1 ;
+        if (e.numerador < 0) {
+            e.incremento -= e.numerador ;
+            sinal = -1 ;
+        } else {
+            e.incremento += e.numerador ;
+        }
         while (e.incremento > e.denominador) {
-            e.xmin++ ;
+            e.xmin += sinal ;
             e.incremento -= e.denominador ;
         }
 
@@ -58,7 +65,10 @@ QVector<int> ActiveEdgeTable::intersections() {
     QVector<int> v = QVector<int>() ;
 
     for (int i = 0; i < lst.size(); i++) {
-        v.append(lst.at(i).xmin);
+        if (v.indexOf(lst.at(i).xmin) < 0) {
+            v.append(lst.at(i).xmin);
+            std::cout << "inter " << v.at(i) << "\n";
+        }
     }
 
     return v ;

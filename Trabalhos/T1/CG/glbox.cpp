@@ -15,7 +15,6 @@ void GLBox::changeFg(QColor c) {
     qreal r,  g, b ;
     c.getRgbF(&r, &g, &b, NULL);
     glColor3f(r, g, b);
-    std::cout << r << ", " << g << " , " << b << "\n" ;
 }
 
 void GLBox::setBgColor(QColor c) {
@@ -57,6 +56,7 @@ void GLBox::drawPixel(int x, int y) {
         this->changeFg(fgColor) ;
         glVertex2i(x, y);
     glEnd() ;
+    draw();
 }
 
 void GLBox::preencher() {
@@ -72,12 +72,13 @@ void GLBox::preencher() {
         //Pega as intersecções da linha com as arestas
         inter = aet.intersections() ;
         std::cout << "passei do vetor \n" ;
-        int x = 0 ;
+        int x = 1 ;
         int i = 0 ;
         char parity = 0 ;
 
         //Enquanto nao passar por todas intersecções
         while (i < inter.size()) {
+            std::cout << i << ", " << inter.at(i) << "\n" ;
             //Se o x é ponto de intersecção, muda a paridade
             if (x == inter.at(i)) {
                 //Se a paridade for 0, pinta o pixel de x
@@ -100,6 +101,7 @@ void GLBox::preencher() {
 
         //Incrementa a linha
         y++ ;
+        std::cout << "y: " << y << "\n\n" ;
     } while (aet.incY()) ;
 
 
