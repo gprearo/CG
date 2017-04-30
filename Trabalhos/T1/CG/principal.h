@@ -34,6 +34,10 @@ private slots:
 
     void on_pushButton_Polyg_clicked();
 
+    void on_pushButton_Polyg_2_clicked();
+
+    void on_pushButton_Polyg_3_clicked();
+
 private:
     Ui::Principal *ui;
 

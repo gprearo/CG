@@ -36,7 +36,11 @@ void Principal::on_actionCor_da_linha_triggered() {
 
 void Principal::on_actionCor_de_fundo_triggered() {
     QColor color = QColorDialog::getColor(Qt::yellow, this );
+    QPolygon p = gl->poly ;
+    gl->poly = QPolygon() ;
     gl->setBgColor(color);
+    gl->poly = p ;
+    gl->draw() ;
 }
 
 void Principal::on_pushButton_Point_clicked() {
@@ -46,5 +50,17 @@ void Principal::on_pushButton_Point_clicked() {
 
 void Principal::on_pushButton_Polyg_clicked() {
     gl->type = 1;
+    gl->draw();
+}
+
+void Principal::on_pushButton_Polyg_2_clicked()
+{
+   gl->poly = QPolygon() ;
+   gl->draw() ;
+}
+
+void Principal::on_pushButton_Polyg_3_clicked()
+{
+    gl->preencher();
     gl->draw();
 }

@@ -14,11 +14,17 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
     glbox.cpp \
-    principal.cpp
+    principal.cpp \
+    edge.cpp \
+    edgetable.cpp \
+    activeedgetable.cpp
 
 HEADERS += \
     glbox.h \
-    principal.h
+    principal.h \
+    edge.h \
+    edgetable.h \
+    activeedgetable.h
 
 FORMS += \
     principal.ui

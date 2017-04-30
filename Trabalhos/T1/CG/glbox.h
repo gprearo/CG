@@ -21,6 +21,7 @@ public:
 
     void setBgColor(QColor c);
     void setFgColor(QColor c);
+    void preencher() ;
 
     short type;
 
@@ -42,6 +43,8 @@ protected:
 
     void drawVertex();
     void drawPolygon() ;
+    void drawPixel(int x, int y) ;
+
 private:
     void mousePressEvent(QMouseEvent *event);
 };

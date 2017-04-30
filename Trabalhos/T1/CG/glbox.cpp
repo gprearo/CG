@@ -2,6 +2,8 @@
 #include <iostream>
 #include <QPainter>
 
+#include "activeedgetable.h"
+
 void GLBox::clearBg(QColor c) {
     qreal r,  g, b ;
     c.getRgbF(&r, &g, &b, NULL);
@@ -46,6 +48,62 @@ void GLBox::initializeGL() {
     glMatrixMode( GL_PROJECTION );
     glLoadIdentity();
 
+
+
+}
+
+void GLBox::drawPixel(int x, int y) {
+    glBegin(GL_POINT);
+        this->changeFg(fgColor) ;
+        glVertex2i(x, y);
+    glEnd() ;
+}
+
+void GLBox::preencher() {
+    ActiveEdgeTable aet = ActiveEdgeTable(this->poly) ;
+
+    aet.print() ;
+
+    int y = aet.start() ;
+
+    do {
+        std::cout << "linha:" << y ;
+        QVector<int> inter ;
+        //Pega as intersecções da linha com as arestas
+        inter = aet.intersections() ;
+        std::cout << "passei do vetor \n" ;
+        int x = 0 ;
+        int i = 0 ;
+        char parity = 0 ;
+
+        //Enquanto nao passar por todas intersecções
+        while (i < inter.size()) {
+            //Se o x é ponto de intersecção, muda a paridade
+            if (x == inter.at(i)) {
+                //Se a paridade for 0, pinta o pixel de x
+                if (!parity) {
+                    drawPixel(x, y);
+                }
+
+                //Incrementa o i e muda a paridade
+                i++ ;
+                parity = !parity ;
+            } else {
+                //Se a paridade é 1, pinta o pixel
+                if (parity) {
+                    drawPixel(x, y);
+                }
+            }
+            //Anda na linha
+            x++ ;
+        }
+
+        //Incrementa a linha
+        y++ ;
+    } while (aet.incY()) ;
+
+
+
 }
 
 void GLBox::resizeGL(int width, int height) {
@@ -65,11 +123,11 @@ void GLBox::drawVertex() {
     // Test
     changeFg(fgColor);
 
-    char c = 'A';
+    int p = 1 ;
 
     // Desenha os vértices
-    for(int i = 0; i < vPoints.size(); i++) {
-        QPoint vertex = vPoints.at(i);
+    for(int i = 0; i < poly.size(); i++) {
+        QPoint vertex = poly.at(i) ;
 
         // Pinta o ponto do vértice
         glBegin(GL_POINTS);
@@ -80,10 +138,10 @@ void GLBox::drawVertex() {
         QPainter painter( this );
         painter.setPen(Qt::black);
         painter.setFont(QFont("Arial", 10));
-        painter.drawText(vertex.x() + 1, this->height-vertex.y() - 1, QString(c));
-        c++; // Próxima letra
+        painter.drawText(vertex.x() + 1, this->height-vertex.y() - 1, "P"+QString::number(p));
+        p++; // Próxima letra
 
-        std::cout << vPoints.size() << ", " << vertex.x() << ", " << vertex.y() << std::endl; // DEBUG
+        std::cout << poly.size() << ", " << vertex.x() << ", " << vertex.y() << std::endl; // DEBUG
     }
     glFlush();
 }

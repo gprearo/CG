@@ -50,6 +50,32 @@
      <string>Polígono</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="pushButton_Polyg_2">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>10</y>
+      <width>90</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Limpar</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_Polyg_3">
+    <property name="geometry">
+     <rect>
+      <x>460</x>
+      <y>10</y>
+      <width>90</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Preencher</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -57,7 +83,7 @@
      <x>0</x>
      <y>0</y>
      <width>640</width>
-     <height>27</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuPreenchimento_de_pol_gonos">
@@ -67,15 +93,7 @@
     <addaction name="actionCor_da_linha"/>
     <addaction name="actionCor_de_fundo"/>
    </widget>
-   <widget class="QMenu" name="menuM_todos_de_preenchimento">
-    <property name="title">
-     <string>Preencher</string>
-    </property>
-    <addaction name="actionTabela_de_lados"/>
-    <addaction name="actionTabela_de_lados_ativos"/>
-   </widget>
    <addaction name="menuPreenchimento_de_pol_gonos"/>
-   <addaction name="menuM_todos_de_preenchimento"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionCor_da_linha">
