@@ -1,2 +1,10 @@
+# Ignore all
+*
+
+# Unignore all with extensions
+!*.*
+
+# Ignore compilation files
 *.o
 *.out
+moc_predefs.h
