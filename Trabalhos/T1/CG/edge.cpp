@@ -25,6 +25,7 @@ Edge::Edge(QPoint p1, QPoint p2) {
     this->ymin = p1.y() ;
     this->xmin = p1.x() ;
     this->ymax = p2.y() ;
+    this->xmax = p2.x() ;
 
     this->numerador = p2.x() - p1.x() ;
     this->denominador = p2.y() - p1.y() ;
