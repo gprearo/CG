@@ -32,14 +32,15 @@ int ActiveEdgeTable::incY() {
     currY++ ;
 
     if (currY >= et.y.size()) {
-        std::cout << et.y.size() << "\n" ;
         return 0 ;
     }
 
     for (int i = 0; i < lst.size(); i++) {
         Edge e = lst.at(i) ;
+        // Retira da lista de varredura quando y = ymax
         if (currY >= e.ymax) {
-            lst.removeAt(i);
+            lst.removeAt(i); // Remove o item da lista
+            i--; // Corrige a contagem após a remoção do item
             continue ;
         }
 

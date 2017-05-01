@@ -13,25 +13,25 @@
 
 class GLBox : public QOpenGLWidget, public QOpenGLFunctions{
 public:
-    GLBox(QWidget *parent) : QOpenGLWidget(parent) {type = DRAW_VERTEX; }
+    GLBox(QWidget *parent) : QOpenGLWidget(parent) {mode = DRAW_VERTEX;
+                                                   poly << QPoint(400, 270) << QPoint(400, 70) << QPoint(200, 200) << QPoint(200, 100);}
 
     void draw();
     void reset();
 
-    int height = 300;
-    int width = 600;
+    void setMode(short mode);
 
     void setBgColor(QColor c);
     void setFgColor(QColor c);
     void preencher() ;
 
-    short type;
+
 
 protected:
     QColor bgColor;
     QColor fgColor;
 
-    QList<QPoint> vPoints;
+    short mode;
 
     void initializeGL();
 
@@ -47,6 +47,9 @@ protected:
     void drawPixel(int x, int y) ;
 
 private:
+    int height = 300;
+    int width = 600;
+
     QPolygon poly;
 
     void mousePressEvent(QMouseEvent *event);

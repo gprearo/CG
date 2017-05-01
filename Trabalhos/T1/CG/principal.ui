@@ -50,10 +50,10 @@
      <string>Polígono</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_Polyg_2">
+   <widget class="QPushButton" name="pushButton_Clean">
     <property name="geometry">
      <rect>
-      <x>350</x>
+      <x>460</x>
       <y>10</y>
       <width>90</width>
       <height>31</height>
@@ -63,10 +63,10 @@
      <string>Limpar</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_Polyg_3">
+   <widget class="QPushButton" name="pushButton_Fill">
     <property name="geometry">
      <rect>
-      <x>460</x>
+      <x>350</x>
       <y>10</y>
       <width>90</width>
       <height>31</height>
@@ -83,7 +83,7 @@
      <x>0</x>
      <y>0</y>
      <width>640</width>
-     <height>22</height>
+     <height>27</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuPreenchimento_de_pol_gonos">

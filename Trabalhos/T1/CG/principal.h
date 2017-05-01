@@ -34,9 +34,9 @@ private slots:
 
     void on_pushButton_Polyg_clicked();
 
-    void on_pushButton_Polyg_2_clicked();
+    void on_pushButton_Clean_clicked();
 
-    void on_pushButton_Polyg_3_clicked();
+    void on_pushButton_Fill_clicked();
 
 private:
     Ui::Principal *ui;
