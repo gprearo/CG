@@ -37,7 +37,7 @@ int ActiveEdgeTable::incY() {
 
     for (int i = 0; i < lst.size(); i++) {
         Edge e = lst.at(i) ;
-        if (currY > e.ymax) {
+        if (currY >= e.ymax) {
             lst.removeAt(i);
             continue ;
         }
