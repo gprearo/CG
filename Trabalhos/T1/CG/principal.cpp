@@ -10,6 +10,9 @@ Principal::Principal(QWidget *parent) :
 
     gl = new GLBox(ui->openGLWidget) ;
     gl->resize(ui->openGLWidget->width(), ui->openGLWidget->height());
+
+    this->setFixedSize(this->width(), this->height());
+    this->statusBar()->setSizeGripEnabled(false);
 }
 
 
