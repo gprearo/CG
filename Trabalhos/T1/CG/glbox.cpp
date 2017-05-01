@@ -18,15 +18,13 @@ void GLBox::changeFg(QColor c) {
 }
 
 void GLBox::setBgColor(QColor c) {
-    bgColor = c ;
-    clearBg(bgColor);
-    changeFg(fgColor);
+    bgColor = c;
+    draw();
 }
 
 void GLBox::setFgColor(QColor c) {
-    fgColor = c ;
-    clearBg(bgColor);
-    changeFg(fgColor);
+    fgColor = c;
+    draw();
 }
 
 
@@ -51,18 +49,21 @@ void GLBox::drawPixel(int x, int y) {
 }
 
 void GLBox::preencher() {
-    std::cout << "preencher()" << std::endl;
     if(this->poly.size() < 2)
         return;
 
+    clearBg(bgColor);
     glClear(GL_COLOR_BUFFER_BIT);
-    glBegin(GL_POINTS);
+    changeFg(fgColor);
+
+
     ActiveEdgeTable aet = ActiveEdgeTable(this->poly) ;
 
     aet.print() ; // DEBUG
 
     int y = aet.start() ;
 
+    glBegin(GL_POINTS);
     do {
         std::cout << "linha:" << y ;
         QVector<int> inter ;
@@ -111,23 +112,19 @@ void GLBox::preencher() {
 }
 
 void GLBox::resizeGL(int width, int height) {
-    //Muda a altura e largura global do componente
-    this->height = height ;
-    this->width = width ;
-    std::cout << "resize: " << width << ", " << height << std::endl;
+    // Muda a altura e largura global do componente
+    this->height = height;
+    this->width = width;
     glViewport(0, 0, width, height);
     glOrtho(0.0, width, 0.0, height, 1.0, -1.0 );
 }
 
 void GLBox::drawVertex() {
-    glClear(GL_COLOR_BUFFER_BIT);
     clearBg(bgColor);
-    std::cout << "drawVertex()" << std::endl;
-
-    // Test
+    glClear(GL_COLOR_BUFFER_BIT);
     changeFg(fgColor);
 
-    int p = 1 ;
+    int p = 1; // Número do ponto
 
     // Desenha os vértices
     for(int i = 0; i < poly.size(); i++) {
@@ -139,32 +136,29 @@ void GLBox::drawVertex() {
         glEnd();
 
         // Pinta a letra do vértice
-        QPainter painter( this );
-        painter.setPen(Qt::black);
+        QPainter painter(this);
+        painter.setPen(fgColor);
         painter.setFont(QFont("Arial", 10));
         painter.drawText(vertex.x() + 1, this->height-vertex.y() - 1, "P"+QString::number(p));
-        p++; // Próxima letra
-
-        std::cout << poly.size() << ", " << vertex.x() << ", " << vertex.y() << std::endl; // DEBUG
+        p++; // Próximo número
     }
     glFlush();
 }
 
 void GLBox::drawPolygon() {
-    glClear(GL_COLOR_BUFFER_BIT);
     clearBg(bgColor);
-    std::cout << "paintGL()" << std::endl;
-    glBegin(GL_LINE_LOOP);
-
-    // Test
+    glClear(GL_COLOR_BUFFER_BIT);
     changeFg(fgColor);
 
-    // Draw QPolygon
+    glBegin(GL_LINE_LOOP);
+
+    // Desenha o polígono
     for(int i = 0; i < poly.size(); i++) {
         QPointF vertex = poly.point(i);
         glVertex2i(vertex.x(), vertex.y());
         std::cout << poly.size() << ", " << vertex.x() << ", " << vertex.y() << std::endl;
     }
+
     glEnd();
     glFlush();
 }

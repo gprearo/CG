@@ -35,13 +35,14 @@ void Principal::on_actionTabela_de_lados_ativos_triggered() {
 
 void Principal::on_actionCor_da_linha_triggered() {
     QColor color = QColorDialog::getColor(Qt::yellow, this );
-    gl->setFgColor(color);
+    if(color.isValid())
+        gl->setFgColor(color);
 }
 
 void Principal::on_actionCor_de_fundo_triggered() {
-    QColor color = QColorDialog::getColor(Qt::yellow, this );
-    gl->setBgColor(color);
-    gl->draw() ;
+    QColor color = QColorDialog::getColor(Qt::yellow, this);
+    if(color.isValid())
+        gl->setBgColor(color);
 }
 
 void Principal::on_pushButton_Point_clicked() {

@@ -29,10 +29,9 @@ public:
 
 protected:
     QColor bgColor;
-    QColor fgColor ;
+    QColor fgColor;
 
     QList<QPoint> vPoints;
-
 
     void initializeGL();
 
