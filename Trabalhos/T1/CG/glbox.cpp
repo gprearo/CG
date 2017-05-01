@@ -78,6 +78,9 @@ void GLBox::preencher() {
         char parity = 0 ;
 
         //Enquanto nao passar por todas intersecções
+        if (inter.size() == 1) {
+            continue ;
+        }
         while (i < inter.size()) {
             //std::cout << i << ", " << inter.at(i) << ", " << inter.size() << "\n" ;
             //Se o x é ponto de intersecção, muda a paridade

@@ -56,6 +56,7 @@ void Principal::on_pushButton_Polyg_clicked() {
 void Principal::on_pushButton_Polyg_2_clicked()
 {
    gl->poly = QPolygon() ;
+   gl->type = 0 ;
    gl->draw() ;
 }
 
