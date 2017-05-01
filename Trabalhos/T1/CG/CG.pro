@@ -2,12 +2,11 @@ QT += core gui widgets
 QT += opengl
 QT += widgets
 
-CONFIG += c++11 -lglut
+CONFIG += c++11
 
-LIBS += -lglut
+LIBS += -lopengl32
 
 TARGET = CG
-CONFIG += console
 CONFIG -= app_bundle
 
 TEMPLATE = app
