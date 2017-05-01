@@ -22,6 +22,7 @@ int ActiveEdgeTable::start() {
 
     currY = i ;
 
+    std::cout << et.y.size() << ", i: " << i << std::endl;
     lst = et.y.at(i) ;
 
     return currY ;

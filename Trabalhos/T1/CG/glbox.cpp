@@ -52,6 +52,9 @@ void GLBox::drawPixel(int x, int y) {
 
 void GLBox::preencher() {
     std::cout << "preencher()" << std::endl;
+    if(this->poly.size() < 2)
+        return;
+
     glClear(GL_COLOR_BUFFER_BIT);
     glBegin(GL_POINTS);
     ActiveEdgeTable aet = ActiveEdgeTable(this->poly) ;
