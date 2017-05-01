@@ -42,19 +42,28 @@ int ActiveEdgeTable::incY() {
             continue ;
         }
 
-        int sinal = 1 ;
-        if (e.numerador < 0) {
-            e.incremento -= e.numerador ;
-            sinal = -1 ;
-        } else {
-            e.incremento += e.numerador ;
-        }
+        e.incremento += e.numerador ;
         while (e.incremento > e.denominador) {
-            e.xmin += sinal ;
+            e.xmin++ ;
             e.incremento -= e.denominador ;
         }
 
         lst.replace(i, e);
+    }
+
+    QList<Edge> newEdges = et.y.at(currY) ;
+    for (int i = 0; i < newEdges.size(); i++) {
+        bool flag = 1 ;
+        for (int j = 0; j < lst.size(); j++) {
+            if (newEdges.at(i).xmin < lst.at(j).xmin) {
+                flag = 0 ;
+                lst.insert(j, newEdges.at(i));
+                break ;
+            }
+        }
+        if (flag) {
+            lst.append(newEdges.at(i));
+        }
     }
 
     return currY ;
@@ -67,7 +76,6 @@ QVector<int> ActiveEdgeTable::intersections() {
     for (int i = 0; i < lst.size(); i++) {
         if (v.indexOf(lst.at(i).xmin) < 0) {
             v.append(lst.at(i).xmin);
-            std::cout << "inter " << v.at(i) << "\n";
         }
     }
 
