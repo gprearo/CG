@@ -44,7 +44,7 @@ int ActiveEdgeTable::incY() {
 
         e.incremento += e.numerador ;
         while (e.incremento > e.denominador) {
-            e.xmin++ ;
+            e.xmin+=e.sinal ;
             e.incremento -= e.denominador ;
         }
 

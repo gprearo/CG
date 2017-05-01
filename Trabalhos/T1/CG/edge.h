@@ -16,6 +16,8 @@ public:
 
     //Será usado na hora de preencher o poligono
     int incremento ;
+
+    int sinal ;
 };
 
 #endif // EDGE_H
