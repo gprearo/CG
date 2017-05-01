@@ -7,4 +7,5 @@
 # Ignore compilation files
 *.o
 *.out
+*.user
 moc_predefs.h
