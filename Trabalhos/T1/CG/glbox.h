@@ -13,8 +13,7 @@
 
 class GLBox : public QOpenGLWidget, public QOpenGLFunctions{
 public:
-    GLBox(QWidget *parent) : QOpenGLWidget(parent) {mode = DRAW_VERTEX;
-                                                   poly << QPoint(400, 270) << QPoint(400, 70) << QPoint(200, 200) << QPoint(200, 100);}
+    GLBox(QWidget *parent) : QOpenGLWidget(parent) {mode = DRAW_VERTEX;}
 
     void draw();
     void reset();
