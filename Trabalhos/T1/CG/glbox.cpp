@@ -52,16 +52,16 @@ void GLBox::initializeGL() {
 }
 
 void GLBox::drawPixel(int x, int y) {
-    glBegin(GL_POINT);
-        this->changeFg(fgColor) ;
-        glVertex2i(x, y);
-    glEnd() ;
-    draw();
+
+    changeFg(fgColor);
+    glVertex2i(x, y);
 }
 
 void GLBox::preencher() {   
     std::cout << "preencher()" << std::endl;
     glClear(GL_COLOR_BUFFER_BIT);
+    clearBg(bgColor);
+    glBegin(GL_POINTS);
     ActiveEdgeTable aet = ActiveEdgeTable(this->poly) ;
 
     aet.print() ;
@@ -73,14 +73,13 @@ void GLBox::preencher() {
         QVector<int> inter ;
         //Pega as intersecções da linha com as arestas
         inter = aet.intersections() ;
-        std::cout << "passei do vetor \n" ;
         int x = 1 ;
         int i = 0 ;
         char parity = 0 ;
 
         //Enquanto nao passar por todas intersecções
         while (i < inter.size()) {
-            std::cout << i << ", " << inter.at(i) << "\n" ;
+            //std::cout << i << ", " << inter.at(i) << ", " << inter.size() << "\n" ;
             //Se o x é ponto de intersecção, muda a paridade
             if (x == inter.at(i)) {
                 //Se a paridade for 0, pinta o pixel de x
@@ -102,12 +101,13 @@ void GLBox::preencher() {
         }
 
         //Incrementa a linha
-        y++ ;
         std::cout << "y: " << y << "\n\n" ;
-    } while (aet.incY()) ;
+    } while ((y = aet.incY())) ;
 
-
-
+    glEnd() ;
+    glFlush();
+    std::cout << "Terminou" << "\n" ;
+    return ;
 }
 
 void GLBox::resizeGL(int width, int height) {
@@ -182,7 +182,6 @@ void GLBox::paintGL() {
 
 void GLBox::draw() {
     this->update();
-
 }
 
 void GLBox::mousePressEvent(QMouseEvent *event) {

@@ -31,6 +31,7 @@ int ActiveEdgeTable::incY() {
     currY++ ;
 
     if (currY >= et.y.size()) {
+        std::cout << et.y.size() << "\n" ;
         return 0 ;
     }
 
@@ -56,7 +57,7 @@ int ActiveEdgeTable::incY() {
         lst.replace(i, e);
     }
 
-    return 1 ;
+    return currY ;
 }
 
 
