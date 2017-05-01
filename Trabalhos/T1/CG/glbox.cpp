@@ -85,7 +85,7 @@ void GLBox::preencher() {
         while (i < inter.size()) {
             //std::cout << i << ", " << inter.at(i) << ", " << inter.size() << "\n" ;
             //Se o x é ponto de intersecção, muda a paridade
-            if (x >= inter.at(i)) {
+            if (x == inter.at(i)) {
                 //Se a paridade for 0, pinta o pixel de x
                 if (!parity) {
                     drawPixel(x, y);
@@ -99,9 +99,10 @@ void GLBox::preencher() {
                 if (parity) {
                     drawPixel(x, y);
                 }
+                //Anda na linha
+                x++ ;
             }
-            //Anda na linha
-            x++ ;
+
         }
 
         //Incrementa a linha

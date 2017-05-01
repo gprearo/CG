@@ -74,12 +74,11 @@ QVector<int> ActiveEdgeTable::intersections() {
     QVector<int> v = QVector<int>() ;
 
     for (int i = 0; i < lst.size(); i++) {
-        if (v.indexOf(lst.at(i).xmin) < 0) {
             v.append(lst.at(i).xmin);
-        }
     }
 
     qSort(v.begin(), v.end()) ;
+
     return v ;
 }
 
