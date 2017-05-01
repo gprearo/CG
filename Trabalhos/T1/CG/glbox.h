@@ -16,7 +16,8 @@ public:
     GLBox(QWidget *parent) : QOpenGLWidget(parent) {type = DRAW_VERTEX; }
 
     void draw();
-    QPolygon poly;
+    void reset();
+
     int height = 300;
     int width = 600;
 
@@ -47,6 +48,8 @@ protected:
     void drawPixel(int x, int y) ;
 
 private:
+    QPolygon poly;
+
     void mousePressEvent(QMouseEvent *event);
 };
 

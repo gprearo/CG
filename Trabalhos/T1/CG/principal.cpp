@@ -11,6 +11,7 @@ Principal::Principal(QWidget *parent) :
     gl = new GLBox(ui->openGLWidget) ;
     gl->resize(ui->openGLWidget->width(), ui->openGLWidget->height());
 
+    // Bloqueia o redimensionamento da janela
     this->setFixedSize(this->width(), this->height());
     this->statusBar()->setSizeGripEnabled(false);
 }
@@ -39,10 +40,7 @@ void Principal::on_actionCor_da_linha_triggered() {
 
 void Principal::on_actionCor_de_fundo_triggered() {
     QColor color = QColorDialog::getColor(Qt::yellow, this );
-    QPolygon p = gl->poly ;
-    gl->poly = QPolygon() ;
     gl->setBgColor(color);
-    gl->poly = p ;
     gl->draw() ;
 }
 
@@ -56,15 +54,12 @@ void Principal::on_pushButton_Polyg_clicked() {
     gl->draw();
 }
 
-void Principal::on_pushButton_Polyg_2_clicked()
-{
-   gl->poly = QPolygon() ;
-   gl->type = 0 ;
-   gl->draw() ;
+void Principal::on_pushButton_Polyg_2_clicked() {
+    gl->reset();
+    gl->draw() ;
 }
 
-void Principal::on_pushButton_Polyg_3_clicked()
-{
+void Principal::on_pushButton_Polyg_3_clicked() {
     gl->type = 2;
     gl->draw();
 }

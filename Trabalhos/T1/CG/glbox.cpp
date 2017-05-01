@@ -21,15 +21,12 @@ void GLBox::setBgColor(QColor c) {
     bgColor = c ;
     clearBg(bgColor);
     changeFg(fgColor);
-    this->draw() ;
 }
 
 void GLBox::setFgColor(QColor c) {
     fgColor = c ;
     clearBg(bgColor);
     changeFg(fgColor);
-    draw();
-    std::cout << c.name().toStdString() ;
 }
 
 
@@ -46,25 +43,20 @@ void GLBox::initializeGL() {
     glEnable(GL_BLEND) ;
     glMatrixMode( GL_PROJECTION );
     glLoadIdentity();
-
-
-
 }
 
 void GLBox::drawPixel(int x, int y) {
-
     changeFg(fgColor);
     glVertex2i(x, y);
 }
 
-void GLBox::preencher() {   
+void GLBox::preencher() {
     std::cout << "preencher()" << std::endl;
     glClear(GL_COLOR_BUFFER_BIT);
-    clearBg(bgColor);
     glBegin(GL_POINTS);
     ActiveEdgeTable aet = ActiveEdgeTable(this->poly) ;
 
-    aet.print() ;
+    aet.print() ; // DEBUG
 
     int y = aet.start() ;
 
@@ -187,6 +179,10 @@ void GLBox::paintGL() {
 
 void GLBox::draw() {
     this->update();
+}
+
+void GLBox::reset() {
+    this->poly.clear();
 }
 
 void GLBox::mousePressEvent(QMouseEvent *event) {
