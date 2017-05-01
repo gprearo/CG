@@ -79,6 +79,7 @@ QVector<int> ActiveEdgeTable::intersections() {
         }
     }
 
+    qSort(v.begin(), v.end()) ;
     return v ;
 }
 
