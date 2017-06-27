@@ -2,6 +2,11 @@
 #include <iostream>
 #include <QPainter>
 #include "sphere.h"
+#include <GL/glut.h>
+#include <QGLWidget>
+#include <Qt3DExtras/QTorusMesh>
+#include <Qt3DExtras/QPhongMaterial>
+#include <Qt3DCore/QTransform>
 
 void GLBox::initializeGL() {
     // Set up the rendering context, load shaders and other resources, etc.:
@@ -12,10 +17,32 @@ void GLBox::initializeGL() {
     bgColor = QColor(255, 255, 255, 255);
 
     clearBg(bgColor);
+    int i=0;
+
     glMatrixMode(GL_PROJECTION);
     glEnable(GL_BLEND) ;
     glMatrixMode( GL_PROJECTION );
     glLoadIdentity();
+
+    Qt3DExtras::QTorusMesh *m_torus = new Qt3DExtras::QTorusMesh();
+    m_torus->setRadius(1.0f);
+    m_torus->setMinorRadius(0.4f);
+    m_torus->setRings(100);
+    m_torus->setSlices(20);
+
+    Qt3DCore::QTransform *torusTransform = new Qt3DCore::QTransform();
+    torusTransform->setScale(2.0f);
+    torusTransform->setRotation(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 25.0f));
+    torusTransform->setTranslation(QVector3D(5.0f, 4.0f, 0.0f));
+
+    Qt3DExtras::QPhongMaterial *torusMaterial = new Qt3DExtras::QPhongMaterial();
+    torusMaterial->setDiffuse(QColor(QRgb(0xbeb32b)));
+
+    m_torus->setEnabled(true);
+}
+
+void GLBox::display() {
+
 }
 
 void GLBox::resizeGL(int width, int height) {
@@ -27,7 +54,23 @@ void GLBox::resizeGL(int width, int height) {
 }
 
 void GLBox::paintGL() {
-    drawSphere();
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glMatrixMode(GL_MODELVIEW);
+    /*
+        glPushMatrix();
+               srand((unsigned int)time(NULL));
+
+           glRotatef (xRotated, 0.0, 0.0, 0.0);    // rotation about Y axis
+           glRotatef (yRotated, 0.0, 0.0, 0.0);    // rotation about Z axis
+           glRotatef (zRotated, 0.0 , 0.0, 0.0);
+
+           glPushMatrix();
+           glTranslatef (0, 0.0, 0.0);
+           glutSolidSphere(1.0, 50, 50);
+            glPopMatrix();
+
+        glFlush();*/
+    glutSolidSphere (1.0, 50, 50);
 }
 
 void GLBox::drawSphere() {

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Principal</class>
+ <widget class="QMainWindow" name="Principal">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>640</width>
+    <height>480</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QOpenGLWidget" name="openGLWidget">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>50</y>
+      <width>621</width>
+      <height>331</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_Point">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>10</y>
+      <width>90</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Pontos</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_Polyg">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>10</y>
+      <width>90</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Polígono</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_Clean">
+    <property name="geometry">
+     <rect>
+      <x>460</x>
+      <y>10</y>
+      <width>90</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Limpar</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_Fill">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>10</y>
+      <width>90</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Preencher</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>640</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuPreenchimento_de_pol_gonos">
+    <property name="title">
+     <string>&amp;Cores</string>
+    </property>
+    <addaction name="actionCor_da_linha"/>
+    <addaction name="actionCor_de_fundo"/>
+   </widget>
+   <addaction name="menuPreenchimento_de_pol_gonos"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionCor_da_linha">
+   <property name="text">
+    <string>&amp;Cor da linha</string>
+   </property>
+  </action>
+  <action name="actionCor_de_fundo">
+   <property name="text">
+    <string>Cor &amp;de fundo</string>
+   </property>
+  </action>
+  <action name="actionTabela_de_lados">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>&amp;Tabela de lados</string>
+   </property>
+  </action>
+  <action name="actionTabela_de_lados_ativos">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Tabela &amp;de lados ativos</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

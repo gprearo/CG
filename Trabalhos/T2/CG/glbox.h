@@ -24,6 +24,8 @@ public:
     void setFgColor(QColor c);
     void preencher() ;
 
+    void display();
+
 
 
 protected:

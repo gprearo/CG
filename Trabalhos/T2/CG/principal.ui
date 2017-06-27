@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QOpenGLWidget" name="openGLWidget">
+   <widget class="GLBox" name="openGLWidget">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -70,7 +70,7 @@
      <x>0</x>
      <y>0</y>
      <width>640</width>
-     <height>27</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuPreenchimento_de_pol_gonos">
@@ -110,6 +110,13 @@
    </property>
   </action>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>GLBox</class>
+   <extends>QOpenGLWidget</extends>
+   <header location="global">glbox.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
