@@ -1,4 +1,5 @@
 #include "sphere.h"
+#include <iostream>
 
 Sphere::Sphere(float radius, unsigned int rings, unsigned int sectors)
 {
@@ -39,8 +40,9 @@ Sphere::Sphere(float radius, unsigned int rings, unsigned int sectors)
     }
 }
 
-void Sphere::draw(GLfloat x, GLfloat y, GLfloat z, GLfloat ax, GLfloat ay, GLfloat az)
+void Sphere::draw(GLfloat x, GLfloat y, GLfloat z, float ax, float ay, float az)
 {
+    std::cout << "ax: " << ax << std::endl;
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
 

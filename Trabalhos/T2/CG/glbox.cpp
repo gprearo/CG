@@ -15,7 +15,6 @@ GLBox::GLBox(QWidget *parent) : QOpenGLWidget(parent) {
     m_timer = new QTimer(this);
     connect(m_timer, SIGNAL(timeout()), this, SLOT(nextFrame()));
     m_timer->start(1000/60);
-
 }
 
 GLBox::~GLBox()
@@ -38,6 +37,8 @@ void GLBox::initializeGL() {
     glMatrixMode( GL_PROJECTION );
     glLoadIdentity();
 
+     glEnable(GL_CULL_FACE);
+
     GLfloat mat_ambient[]={0.3,0.3,0.3,1.0};
     GLfloat mat_diffuse[]={1.6,1.6,0.6,1.0};
     GLfloat mat_specular[]={1.9,0.9,0.9,1.0};
@@ -51,7 +52,7 @@ void GLBox::initializeGL() {
     GLfloat light0_ambient[]={0.5,0.5,0.5,1.0};
     GLfloat light0_diffuse[]={1.0,1.0,1.0,1.0};
     GLfloat light0_specular[]={1.0,1.0,1.0,1.0};
-    GLfloat light0_position[]={10.0,10.0,-7.0,0.0};
+    GLfloat light0_position[]={1.0,-10.0,-9.0,0.0};
 
     glLightfv(GL_LIGHT0,GL_AMBIENT,light0_ambient);
     glLightfv(GL_LIGHT0,GL_DIFFUSE,light0_diffuse);
@@ -82,6 +83,7 @@ void GLBox::paintGL() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glMatrixMode(GL_MODELVIEW);
     drawSphere();
+//    drawCube();
 }
 
 void GLBox::drawSphere() {
@@ -107,8 +109,87 @@ void GLBox::drawSphere() {
 
     // Desenha as linhas da esfera (comentar para desenhar esfera sólida)
 //    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-    sphere.draw(0, 0, -5, 0, angle, angle);
 
+//    sphere.draw(0, 0, -5, 10, 10, 0);
+    sphere.draw(0, 0, -5, rot.x(), rot.y(), rot.z());
+
+}
+
+void GLBox::drawCube() {
+    clearBg(bgColor);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // Clear color and depth buffers
+    glMatrixMode(GL_MODELVIEW);     // To operate on model-view matrix
+
+     // Render a color-cube consisting of 6 quads with different colors
+     glLoadIdentity();                 // Reset the model-view matrix
+
+
+    int const win_width  = 620; // retrieve window dimensions from
+    int const win_height = 330; // framework of choice here
+    float const win_aspect = (float)win_width / (float)win_height;
+
+    glViewport(0, 0, win_width, win_height);
+
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluPerspective(45, win_aspect, 0.1, 10);
+
+//    glMatrixMode(GL_MODELVIEW);
+//    glLoadIdentity();
+
+    glTranslatef(0, 0.0f, -5.0f);  // Move left and into the screen
+
+    glRotatef(rot.x(), 1, 0, 0);
+    glRotatef(rot.y(), 0, 1, 0);
+    glRotatef(rot.z(), 0, 0, 1);
+//    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+    glBegin(GL_QUADS);                // Begin drawing the color cube with 6 quads
+          // Top face (y = 1.0f)
+          // Define vertices in counter-clockwise (CCW) order with normal pointing out
+          glColor3f(0.0f, 1.0f, 0.0f);     // Green
+          glVertex3f( 1.0f, 1.0f, -1.0f);
+          glVertex3f(-1.0f, 1.0f, -1.0f);
+          glVertex3f(-1.0f, 1.0f,  1.0f);
+          glVertex3f( 1.0f, 1.0f,  1.0f);
+
+          // Bottom face (y = -1.0f)
+          glColor3f(1.0f, 0.5f, 0.0f);     // Orange
+          glVertex3f( 1.0f, -1.0f,  1.0f);
+          glVertex3f(-1.0f, -1.0f,  1.0f);
+          glVertex3f(-1.0f, -1.0f, -1.0f);
+          glVertex3f( 1.0f, -1.0f, -1.0f);
+
+          // Front face  (z = 1.0f)
+          glColor3f(1.0f, 0.0f, 0.0f);     // Red
+          glVertex3f( 1.0f,  1.0f, 1.0f);
+          glVertex3f(-1.0f,  1.0f, 1.0f);
+          glVertex3f(-1.0f, -1.0f, 1.0f);
+          glVertex3f( 1.0f, -1.0f, 1.0f);
+
+          // Back face (z = -1.0f)
+          glColor3f(1.0f, 1.0f, 0.0f);     // Yellow
+          glVertex3f( 1.0f, -1.0f, -1.0f);
+          glVertex3f(-1.0f, -1.0f, -1.0f);
+          glVertex3f(-1.0f,  1.0f, -1.0f);
+          glVertex3f( 1.0f,  1.0f, -1.0f);
+
+          // Left face (x = -1.0f)
+          glColor3f(0.0f, 0.0f, 1.0f);     // Blue
+          glVertex3f(-1.0f,  1.0f,  1.0f);
+          glVertex3f(-1.0f,  1.0f, -1.0f);
+          glVertex3f(-1.0f, -1.0f, -1.0f);
+          glVertex3f(-1.0f, -1.0f,  1.0f);
+
+          // Right face (x = 1.0f)
+          glColor3f(1.0f, 0.0f, 1.0f);     // Magenta
+          glVertex3f(1.0f,  1.0f, -1.0f);
+          glVertex3f(1.0f,  1.0f,  1.0f);
+          glVertex3f(1.0f, -1.0f,  1.0f);
+          glVertex3f(1.0f, -1.0f, -1.0f);
+       glEnd();  // End of drawing color-cube
 }
 
 void GLBox::draw() {
@@ -141,6 +222,18 @@ void GLBox::setFgColor(QColor c) {
 }
 
 void GLBox::nextFrame() {
-    angle += 0.4;
+    //angle += 0.4;
+    std::cout << rot.x() << ", " << rotSpeed.x() << std::endl;
+    rot.setX(rot.x() + rotSpeed.x());
+    rot.setY(rot.y() + rotSpeed.y());
+    rot.setZ(rot.z() + rotSpeed.z());
     update();
+}
+
+void GLBox::rotate(QVector3D ori) {
+    std::cout << "rotate\n";
+    this->rotSpeed.setX(rotSpeed.x() + ori.x());
+    this->rotSpeed.setY(rotSpeed.y() + ori.y());
+    this->rotSpeed.setZ(rotSpeed.z() + ori.z());
+    std::cout << "rotSpeed.x() = " << rotSpeed.x();
 }

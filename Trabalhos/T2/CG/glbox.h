@@ -7,6 +7,7 @@
 #include <QMouseEvent>
 #include <QColor>
 #include <QTimer>
+#include <QVector3D>
 
 #define DRAW_VERTEX 0
 #define DRAW_POLYGON 1
@@ -30,6 +31,8 @@ public:
 
     void display();
 
+    void rotate(QVector3D ori);
+
 
 
 protected:
@@ -52,13 +55,15 @@ protected:
 
     void drawVertex();
     void drawSphere() ;
+    void drawCube();
     void drawPixel(int x, int y) ;
 
 private:
     int height = 300;
     int width = 600;
 
-    GLfloat angle = 0;
+    QVector3D rotSpeed;
+    QVector3D rot;
 
     QPolygon poly;
 

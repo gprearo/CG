@@ -33,6 +33,12 @@ private slots:
 private:
     Ui::Principal *ui;
 
+    void keyPressEvent(QKeyEvent* event);
+    void keyReleaseEvent(QKeyEvent* event);
+
+
+    void mouseMoveEvent(QMouseEvent *event);
+
 };
 
 #endif // PRINCIPAL_H
