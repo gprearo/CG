@@ -18,9 +18,9 @@
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
-#include <QtWidgets/QOpenGLWidget>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QWidget>
+#include <glbox.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -32,7 +32,7 @@ public:
     QAction *actionTabela_de_lados;
     QAction *actionTabela_de_lados_ativos;
     QWidget *centralwidget;
-    QOpenGLWidget *openGLWidget;
+    GLBox *openGLWidget;
     QCheckBox *checkBox_Flat;
     QCheckBox *checkBox_Gouraud;
     QCheckBox *checkBox_Phong;
@@ -57,7 +57,7 @@ public:
         actionTabela_de_lados_ativos->setCheckable(true);
         centralwidget = new QWidget(Principal);
         centralwidget->setObjectName(QStringLiteral("centralwidget"));
-        openGLWidget = new QOpenGLWidget(centralwidget);
+        openGLWidget = new GLBox(centralwidget);
         openGLWidget->setObjectName(QStringLiteral("openGLWidget"));
         openGLWidget->setGeometry(QRect(10, 50, 621, 331));
         checkBox_Flat = new QCheckBox(centralwidget);

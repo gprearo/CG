@@ -28,6 +28,8 @@ private slots:
 
     void on_actionCor_de_fundo_triggered();
 
+    void on_checkBox_Phong_toggled(bool checked);
+
 private:
     Ui::Principal *ui;
 

@@ -52,12 +52,14 @@ SOURCES       = main.cpp \
 		glbox.cpp \
 		principal.cpp \
 		world.cpp \
-		sphere.cpp moc_principal.cpp
+		sphere.cpp moc_glbox.cpp \
+		moc_principal.cpp
 OBJECTS       = main.o \
 		glbox.o \
 		principal.o \
 		world.o \
 		sphere.o \
+		moc_glbox.o \
 		moc_principal.o
 DIST          = /usr/lib64/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib64/qt5/mkspecs/common/unix.conf \
@@ -68,36 +70,119 @@ DIST          = /usr/lib64/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib64/qt5/mkspecs/common/g++-base.conf \
 		/usr/lib64/qt5/mkspecs/common/g++-unix.conf \
 		/usr/lib64/qt5/mkspecs/qconfig.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_3dcore.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_3dcore_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_3dinput.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_3dinput_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_3dlogic.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_3dlogic_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_3dquick.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_3dquick_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_3dquickinput.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_3dquickinput_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_3dquickrender.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_3dquickrender_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_3drender.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_3drender_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_bluetooth.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_bluetooth_private.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_bootstrap_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_clucene_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_compositor.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_compositor_private.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_concurrent.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_concurrent_private.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_core.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_core_private.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_dbus.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_dbus_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_declarative.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_declarative_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_designer.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_designer_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_designercomponents_private.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_eglfs_device_lib_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_enginio.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_enginio_private.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_gui.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_gui_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_help.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_help_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_labscontrols_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_labstemplates_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_location.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_location_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_multimedia.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_multimedia_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_multimediawidgets.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_multimediawidgets_private.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_network.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_network_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_nfc.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_nfc_private.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_opengl.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_opengl_private.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_openglextensions.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_openglextensions_private.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_platformsupport_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_positioning.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_positioning_private.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_printsupport.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_printsupport_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_qml.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_qml_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_qmldevtools_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_qmltest.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_qmltest_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_qtmultimediaquicktools_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_quick.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_quick_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_quickparticles_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_quickwidgets.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_quickwidgets_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_script.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_script_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_scripttools.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_scripttools_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_sensors.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_sensors_private.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_serialport.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_serialport_private.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_sql.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_sql_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_svg.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_svg_private.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_testlib.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_testlib_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_uiplugin.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_uitools.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_uitools_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_waylandclient.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_waylandclient_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_webchannel.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_webchannel_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_webengine.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_webengine_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_webenginecore.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_webenginecore_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_webenginecoreheaders_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_webenginewidgets.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_webenginewidgets_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_webkit.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_webkit_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_webkitwidgets.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_webkitwidgets_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_websockets.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_websockets_private.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_widgets.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_widgets_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_x11extras.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_x11extras_private.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_xcb_qpa_lib_private.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_xml.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_xml_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_xmlpatterns.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_xmlpatterns_private.pri \
 		/usr/lib64/qt5/mkspecs/features/qt_functions.prf \
 		/usr/lib64/qt5/mkspecs/features/qt_config.prf \
 		/usr/lib64/qt5/mkspecs/linux-g++/qmake.conf \
@@ -147,36 +232,119 @@ Makefile: CG.pro /usr/lib64/qt5/mkspecs/linux-g++/qmake.conf /usr/lib64/qt5/mksp
 		/usr/lib64/qt5/mkspecs/common/g++-base.conf \
 		/usr/lib64/qt5/mkspecs/common/g++-unix.conf \
 		/usr/lib64/qt5/mkspecs/qconfig.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_3dcore.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_3dcore_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_3dinput.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_3dinput_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_3dlogic.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_3dlogic_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_3dquick.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_3dquick_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_3dquickinput.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_3dquickinput_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_3dquickrender.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_3dquickrender_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_3drender.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_3drender_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_bluetooth.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_bluetooth_private.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_bootstrap_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_clucene_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_compositor.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_compositor_private.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_concurrent.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_concurrent_private.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_core.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_core_private.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_dbus.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_dbus_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_declarative.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_declarative_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_designer.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_designer_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_designercomponents_private.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_eglfs_device_lib_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_enginio.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_enginio_private.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_gui.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_gui_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_help.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_help_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_labscontrols_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_labstemplates_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_location.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_location_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_multimedia.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_multimedia_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_multimediawidgets.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_multimediawidgets_private.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_network.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_network_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_nfc.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_nfc_private.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_opengl.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_opengl_private.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_openglextensions.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_openglextensions_private.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_platformsupport_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_positioning.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_positioning_private.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_printsupport.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_printsupport_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_qml.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_qml_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_qmldevtools_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_qmltest.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_qmltest_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_qtmultimediaquicktools_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_quick.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_quick_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_quickparticles_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_quickwidgets.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_quickwidgets_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_script.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_script_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_scripttools.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_scripttools_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_sensors.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_sensors_private.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_serialport.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_serialport_private.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_sql.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_sql_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_svg.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_svg_private.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_testlib.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_testlib_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_uiplugin.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_uitools.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_uitools_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_waylandclient.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_waylandclient_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_webchannel.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_webchannel_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_webengine.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_webengine_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_webenginecore.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_webenginecore_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_webenginecoreheaders_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_webenginewidgets.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_webenginewidgets_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_webkit.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_webkit_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_webkitwidgets.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_webkitwidgets_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_websockets.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_websockets_private.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_widgets.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_widgets_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_x11extras.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_x11extras_private.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_xcb_qpa_lib_private.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_xml.pri \
 		/usr/lib64/qt5/mkspecs/modules/qt_lib_xml_private.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_xmlpatterns.pri \
+		/usr/lib64/qt5/mkspecs/modules/qt_lib_xmlpatterns_private.pri \
 		/usr/lib64/qt5/mkspecs/features/qt_functions.prf \
 		/usr/lib64/qt5/mkspecs/features/qt_config.prf \
 		/usr/lib64/qt5/mkspecs/linux-g++/qmake.conf \
@@ -213,36 +381,119 @@ Makefile: CG.pro /usr/lib64/qt5/mkspecs/linux-g++/qmake.conf /usr/lib64/qt5/mksp
 /usr/lib64/qt5/mkspecs/common/g++-base.conf:
 /usr/lib64/qt5/mkspecs/common/g++-unix.conf:
 /usr/lib64/qt5/mkspecs/qconfig.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_3dcore.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_3dcore_private.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_3dinput.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_3dinput_private.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_3dlogic.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_3dlogic_private.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_3dquick.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_3dquick_private.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_3dquickinput.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_3dquickinput_private.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_3dquickrender.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_3dquickrender_private.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_3drender.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_3drender_private.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_bluetooth.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_bluetooth_private.pri:
 /usr/lib64/qt5/mkspecs/modules/qt_lib_bootstrap_private.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_clucene_private.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_compositor.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_compositor_private.pri:
 /usr/lib64/qt5/mkspecs/modules/qt_lib_concurrent.pri:
 /usr/lib64/qt5/mkspecs/modules/qt_lib_concurrent_private.pri:
 /usr/lib64/qt5/mkspecs/modules/qt_lib_core.pri:
 /usr/lib64/qt5/mkspecs/modules/qt_lib_core_private.pri:
 /usr/lib64/qt5/mkspecs/modules/qt_lib_dbus.pri:
 /usr/lib64/qt5/mkspecs/modules/qt_lib_dbus_private.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_declarative.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_declarative_private.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_designer.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_designer_private.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_designercomponents_private.pri:
 /usr/lib64/qt5/mkspecs/modules/qt_lib_eglfs_device_lib_private.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_enginio.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_enginio_private.pri:
 /usr/lib64/qt5/mkspecs/modules/qt_lib_gui.pri:
 /usr/lib64/qt5/mkspecs/modules/qt_lib_gui_private.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_help.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_help_private.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_labscontrols_private.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_labstemplates_private.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_location.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_location_private.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_multimedia.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_multimedia_private.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_multimediawidgets.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_multimediawidgets_private.pri:
 /usr/lib64/qt5/mkspecs/modules/qt_lib_network.pri:
 /usr/lib64/qt5/mkspecs/modules/qt_lib_network_private.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_nfc.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_nfc_private.pri:
 /usr/lib64/qt5/mkspecs/modules/qt_lib_opengl.pri:
 /usr/lib64/qt5/mkspecs/modules/qt_lib_opengl_private.pri:
 /usr/lib64/qt5/mkspecs/modules/qt_lib_openglextensions.pri:
 /usr/lib64/qt5/mkspecs/modules/qt_lib_openglextensions_private.pri:
 /usr/lib64/qt5/mkspecs/modules/qt_lib_platformsupport_private.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_positioning.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_positioning_private.pri:
 /usr/lib64/qt5/mkspecs/modules/qt_lib_printsupport.pri:
 /usr/lib64/qt5/mkspecs/modules/qt_lib_printsupport_private.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_qml.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_qml_private.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_qmldevtools_private.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_qmltest.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_qmltest_private.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_qtmultimediaquicktools_private.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_quick.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_quick_private.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_quickparticles_private.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_quickwidgets.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_quickwidgets_private.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_script.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_script_private.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_scripttools.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_scripttools_private.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_sensors.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_sensors_private.pri:
 /usr/lib64/qt5/mkspecs/modules/qt_lib_serialport.pri:
 /usr/lib64/qt5/mkspecs/modules/qt_lib_serialport_private.pri:
 /usr/lib64/qt5/mkspecs/modules/qt_lib_sql.pri:
 /usr/lib64/qt5/mkspecs/modules/qt_lib_sql_private.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_svg.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_svg_private.pri:
 /usr/lib64/qt5/mkspecs/modules/qt_lib_testlib.pri:
 /usr/lib64/qt5/mkspecs/modules/qt_lib_testlib_private.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_uiplugin.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_uitools.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_uitools_private.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_waylandclient.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_waylandclient_private.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_webchannel.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_webchannel_private.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_webengine.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_webengine_private.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_webenginecore.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_webenginecore_private.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_webenginecoreheaders_private.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_webenginewidgets.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_webenginewidgets_private.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_webkit.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_webkit_private.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_webkitwidgets.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_webkitwidgets_private.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_websockets.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_websockets_private.pri:
 /usr/lib64/qt5/mkspecs/modules/qt_lib_widgets.pri:
 /usr/lib64/qt5/mkspecs/modules/qt_lib_widgets_private.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_x11extras.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_x11extras_private.pri:
 /usr/lib64/qt5/mkspecs/modules/qt_lib_xcb_qpa_lib_private.pri:
 /usr/lib64/qt5/mkspecs/modules/qt_lib_xml.pri:
 /usr/lib64/qt5/mkspecs/modules/qt_lib_xml_private.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_xmlpatterns.pri:
+/usr/lib64/qt5/mkspecs/modules/qt_lib_xmlpatterns_private.pri:
 /usr/lib64/qt5/mkspecs/features/qt_functions.prf:
 /usr/lib64/qt5/mkspecs/features/qt_config.prf:
 /usr/lib64/qt5/mkspecs/linux-g++/qmake.conf:
@@ -317,9 +568,13 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /usr/lib64/qt5/mkspecs/features/data/dummy.cpp
 	g++ -pipe -g -std=gnu++0x -Wall -W -dM -E -o moc_predefs.h /usr/lib64/qt5/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_principal.cpp
+compiler_moc_header_make_all: moc_glbox.cpp moc_principal.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_principal.cpp
+	-$(DEL_FILE) moc_glbox.cpp moc_principal.cpp
+moc_glbox.cpp: glbox.h \
+		moc_predefs.h
+	/usr/lib64/qt5/bin/moc $(DEFINES) --include ./moc_predefs.h -I/usr/lib64/qt5/mkspecs/linux-g++ -I/home/gmomesso/CG/Trabalhos/T2/CG -I/usr/include/qt5 -I/usr/include/qt5/QtOpenGL -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtCore -I/usr/include/c++/6.3.1 -I/usr/include/c++/6.3.1/x86_64-redhat-linux -I/usr/include/c++/6.3.1/backward -I/usr/lib/gcc/x86_64-redhat-linux/6.3.1/include -I/usr/local/include -I/usr/include glbox.h -o moc_glbox.cpp
+
 moc_principal.cpp: glbox.h \
 		principal.h \
 		moc_predefs.h
@@ -330,7 +585,8 @@ compiler_moc_source_clean:
 compiler_uic_make_all: ui_principal.h
 compiler_uic_clean:
 	-$(DEL_FILE) ui_principal.h
-ui_principal.h: principal.ui
+ui_principal.h: principal.ui \
+		glbox.h
 	/usr/lib64/qt5/bin/uic principal.ui -o ui_principal.h
 
 compiler_yacc_decl_make_all:
@@ -364,6 +620,9 @@ world.o: world.cpp world.h \
 
 sphere.o: sphere.cpp sphere.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sphere.o sphere.cpp
+
+moc_glbox.o: moc_glbox.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_glbox.o moc_glbox.cpp
 
 moc_principal.o: moc_principal.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_principal.o moc_principal.cpp

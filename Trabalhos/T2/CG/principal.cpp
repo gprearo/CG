@@ -9,7 +9,7 @@ Principal::Principal(QWidget *parent) :
     ui->setupUi(this);
 
     gl = new GLBox(ui->openGLWidget) ;
-    gl->resize(ui->openGLWidget->width(), ui->openGLWidget->height());
+    //gl->resize(ui->openGLWidget->width(), ui->openGLWidget->height());
 
     this->setWindowTitle("Trabalho 2 - Modelos de iluminação");
 
@@ -33,4 +33,9 @@ void Principal::on_actionCor_de_fundo_triggered() {
     QColor color = QColorDialog::getColor(Qt::yellow, this);
     if(color.isValid())
         gl->setBgColor(color);
+}
+
+void Principal::on_checkBox_Phong_toggled(bool checked)
+{
+
 }

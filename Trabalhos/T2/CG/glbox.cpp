@@ -4,41 +4,66 @@
 #include "sphere.h"
 #include <GL/glut.h>
 #include <QGLWidget>
-#include <Qt3DExtras/QTorusMesh>
-#include <Qt3DExtras/QPhongMaterial>
+//#include <Qt3DExtras/QTorusMesh>
+//#include <Qt3DExtras/QPhongMaterial>
 #include <Qt3DCore/QTransform>
+
+
+GLBox::GLBox(QWidget *parent) : QOpenGLWidget(parent) {
+    mode = DRAW_VERTEX;
+    //setup timer
+    m_timer = new QTimer(this);
+    connect(m_timer, SIGNAL(timeout()), this, SLOT(nextFrame()));
+    m_timer->start(1000/60);
+
+}
+
+GLBox::~GLBox()
+{
+    delete m_timer;
+}
 
 void GLBox::initializeGL() {
     // Set up the rendering context, load shaders and other resources, etc.:
     makeCurrent();
     initializeOpenGLFunctions();
 
-    fgColor = QColor(255, 0, 0, 255) ;
+    fgColor = QColor(0, 255, 0, 255) ;
     bgColor = QColor(255, 255, 255, 255);
 
     clearBg(bgColor);
-    int i=0;
 
     glMatrixMode(GL_PROJECTION);
     glEnable(GL_BLEND) ;
     glMatrixMode( GL_PROJECTION );
     glLoadIdentity();
 
-    Qt3DExtras::QTorusMesh *m_torus = new Qt3DExtras::QTorusMesh();
-    m_torus->setRadius(1.0f);
-    m_torus->setMinorRadius(0.4f);
-    m_torus->setRings(100);
-    m_torus->setSlices(20);
+    GLfloat mat_ambient[]={0.3,0.3,0.3,1.0};
+    GLfloat mat_diffuse[]={1.6,1.6,0.6,1.0};
+    GLfloat mat_specular[]={1.9,0.9,0.9,1.0};
+    GLfloat mat_shininess[]={100.0};
 
-    Qt3DCore::QTransform *torusTransform = new Qt3DCore::QTransform();
-    torusTransform->setScale(2.0f);
-    torusTransform->setRotation(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 25.0f));
-    torusTransform->setTranslation(QVector3D(5.0f, 4.0f, 0.0f));
+    glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT,mat_ambient);
+    glMaterialfv(GL_FRONT_AND_BACK,GL_DIFFUSE,mat_diffuse);
+    glMaterialfv(GL_FRONT_AND_BACK,GL_SPECULAR,mat_specular);
+    glMaterialfv(GL_FRONT_AND_BACK,GL_SHININESS,mat_shininess);
 
-    Qt3DExtras::QPhongMaterial *torusMaterial = new Qt3DExtras::QPhongMaterial();
-    torusMaterial->setDiffuse(QColor(QRgb(0xbeb32b)));
+    GLfloat light0_ambient[]={0.5,0.5,0.5,1.0};
+    GLfloat light0_diffuse[]={1.0,1.0,1.0,1.0};
+    GLfloat light0_specular[]={1.0,1.0,1.0,1.0};
+    GLfloat light0_position[]={10.0,10.0,-7.0,0.0};
 
-    m_torus->setEnabled(true);
+    glLightfv(GL_LIGHT0,GL_AMBIENT,light0_ambient);
+    glLightfv(GL_LIGHT0,GL_DIFFUSE,light0_diffuse);
+    glLightfv(GL_LIGHT0,GL_SPECULAR,light0_specular);
+    glLightfv(GL_LIGHT0,GL_POSITION,light0_position);
+    glLightModelfv(GL_LIGHT_MODEL_TWO_SIDE,light0_ambient);
+
+    glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHT0);
+    glEnable(GL_DEPTH_TEST);
+    glShadeModel(GL_SMOOTH);
+    glEnable(GL_NORMALIZE);
 }
 
 void GLBox::display() {
@@ -55,33 +80,18 @@ void GLBox::resizeGL(int width, int height) {
 
 void GLBox::paintGL() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glMatrixMode(GL_MODELVIEW);
-    /*
-        glPushMatrix();
-               srand((unsigned int)time(NULL));
-
-           glRotatef (xRotated, 0.0, 0.0, 0.0);    // rotation about Y axis
-           glRotatef (yRotated, 0.0, 0.0, 0.0);    // rotation about Z axis
-           glRotatef (zRotated, 0.0 , 0.0, 0.0);
-
-           glPushMatrix();
-           glTranslatef (0, 0.0, 0.0);
-           glutSolidSphere(1.0, 50, 50);
-            glPopMatrix();
-
-        glFlush();*/
-    glutSolidSphere (1.0, 50, 50);
+    glMatrixMode(GL_MODELVIEW);
+    drawSphere();
 }
 
 void GLBox::drawSphere() {
+
     clearBg(bgColor);
     glClear(GL_COLOR_BUFFER_BIT);
-    changeFg(fgColor);
-
 
     Sphere sphere(1, 32, 32);
-    int const win_width  = 600; // retrieve window dimensions from
-    int const win_height = 600; // framework of choice here
+    int const win_width  = 620; // retrieve window dimensions from
+    int const win_height = 330; // framework of choice here
     float const win_aspect = (float)win_width / (float)win_height;
 
     glViewport(0, 0, win_width, win_height);
@@ -96,8 +106,9 @@ void GLBox::drawSphere() {
     glLoadIdentity();
 
     // Desenha as linhas da esfera (comentar para desenhar esfera sólida)
-    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-    sphere.draw(0, -1, -6);
+//    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    sphere.draw(0, 0, -5, 0, angle, angle);
+
 }
 
 void GLBox::draw() {
@@ -129,3 +140,7 @@ void GLBox::setFgColor(QColor c) {
     draw();
 }
 
+void GLBox::nextFrame() {
+    angle += 0.4;
+    update();
+}

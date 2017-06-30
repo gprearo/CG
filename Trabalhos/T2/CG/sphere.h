@@ -16,5 +16,5 @@ protected:
 public:
     Sphere(float radius, unsigned int rings, unsigned int sectors);
 
-    void draw(GLfloat x, GLfloat y, GLfloat z);
+    void draw(GLfloat x, GLfloat y, GLfloat z, GLfloat ax, GLfloat ay, GLfloat az);
 };

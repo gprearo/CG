@@ -6,14 +6,18 @@
 #include <QPolygon>
 #include <QMouseEvent>
 #include <QColor>
+#include <QTimer>
 
 #define DRAW_VERTEX 0
 #define DRAW_POLYGON 1
 #define FILL_POLYGON 2
 
-class GLBox : public QOpenGLWidget, public QOpenGLFunctions{
+class GLBox : public QOpenGLWidget, public QOpenGLFunctions {
+Q_OBJECT
+
 public:
-    GLBox(QWidget *parent) : QOpenGLWidget(parent) {mode = DRAW_VERTEX;}
+    GLBox(QWidget *parent = 0);
+    virtual ~GLBox();
 
     void draw();
     void reset();
@@ -29,6 +33,9 @@ public:
 
 
 protected:
+
+    QTimer* m_timer; //Timer object for triggering updates
+
     QColor bgColor;
     QColor fgColor;
 
@@ -51,7 +58,12 @@ private:
     int height = 300;
     int width = 600;
 
+    GLfloat angle = 0;
+
     QPolygon poly;
+
+private slots:
+    void nextFrame();
 };
 
 #endif // GLBOX_H

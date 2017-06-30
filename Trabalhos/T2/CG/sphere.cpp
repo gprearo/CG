@@ -39,11 +39,15 @@ Sphere::Sphere(float radius, unsigned int rings, unsigned int sectors)
     }
 }
 
-void Sphere::draw(GLfloat x, GLfloat y, GLfloat z)
+void Sphere::draw(GLfloat x, GLfloat y, GLfloat z, GLfloat ax, GLfloat ay, GLfloat az)
 {
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
+
     glTranslatef(x,y,z);
+    glRotatef(ax, 1, 0, 0);
+    glRotatef(ay, 0, 1, 0);
+    glRotatef(az, 0, 0, 1);
 
     glEnableClientState(GL_VERTEX_ARRAY);
     glEnableClientState(GL_NORMAL_ARRAY);
