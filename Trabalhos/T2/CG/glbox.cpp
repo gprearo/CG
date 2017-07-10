@@ -33,38 +33,43 @@ void GLBox::initializeGL() {
     clearBg(bgColor);
 
     glMatrixMode(GL_PROJECTION);
-    glEnable(GL_BLEND) ;
-    glMatrixMode( GL_PROJECTION );
+//    glEnable(GL_BLEND) ;
     glLoadIdentity();
 
-     glEnable(GL_CULL_FACE);
+//     glEnable(GL_CULL_FACE);
 
-    GLfloat mat_ambient[]={0.3,0.3,0.3,1.0};
+    GLfloat mat_ambient[]={1.0,0.3,0.3,0.5};
     GLfloat mat_diffuse[]={1.6,1.6,0.6,1.0};
     GLfloat mat_specular[]={1.9,0.9,0.9,1.0};
     GLfloat mat_shininess[]={100.0};
 
-    glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT,mat_ambient);
-    glMaterialfv(GL_FRONT_AND_BACK,GL_DIFFUSE,mat_diffuse);
-    glMaterialfv(GL_FRONT_AND_BACK,GL_SPECULAR,mat_specular);
-    glMaterialfv(GL_FRONT_AND_BACK,GL_SHININESS,mat_shininess);
+//    glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT,mat_ambient);
+//    glMaterialfv(GL_FRONT_AND_BACK,GL_DIFFUSE,mat_diffuse);
+//    glMaterialfv(GL_FRONT_AND_BACK,GL_SPECULAR,mat_specular);
+//    glMaterialfv(GL_FRONT_AND_BACK,GL_SHININESS,mat_shininess);
 
-    GLfloat light0_ambient[]={0.5,0.5,0.5,1.0};
-    GLfloat light0_diffuse[]={1.0,1.0,1.0,1.0};
-    GLfloat light0_specular[]={1.0,1.0,1.0,1.0};
+    GLfloat light0_ambient[]={0.0, 0.0, 5.0, 1.0};
+//    GLfloat light0_diffuse[]={1.0, 1.0, 1.0, 10.0};
+//    GLfloat light0_specular[]={1.0,1.0,1.0,1.0};
     GLfloat light0_position[]={1.0,-10.0,-9.0,0.0};
 
-    glLightfv(GL_LIGHT0,GL_AMBIENT,light0_ambient);
-    glLightfv(GL_LIGHT0,GL_DIFFUSE,light0_diffuse);
-    glLightfv(GL_LIGHT0,GL_SPECULAR,light0_specular);
+//    glLightfv(GL_LIGHT0,GL_AMBIENT,light0_ambient);
+//    glLightfv(GL_LIGHT0,GL_DIFFUSE,light0_diffuse);
+//    glLightfv(GL_LIGHT0,GL_SPECULAR,light0_specular);
     glLightfv(GL_LIGHT0,GL_POSITION,light0_position);
     glLightModelfv(GL_LIGHT_MODEL_TWO_SIDE,light0_ambient);
 
-    glEnable(GL_LIGHTING);
-    glEnable(GL_LIGHT0);
-    glEnable(GL_DEPTH_TEST);
+
     glShadeModel(GL_SMOOTH);
-    glEnable(GL_NORMALIZE);
+
+    // Set up lighting for the scene
+       GLfloat ambient[4] = {0.0f, 0.0f, 5.0f, 1.0f};
+       glLightfv(GL_LIGHT0, GL_AMBIENT, ambient);
+
+       glEnable(GL_DEPTH_TEST);
+       glEnable(GL_LIGHT0);
+       glEnable(GL_LIGHTING);
+       glEnable(GL_COLOR_MATERIAL);
 }
 
 void GLBox::display() {
@@ -91,7 +96,7 @@ void GLBox::drawSphere() {
     clearBg(bgColor);
     glClear(GL_COLOR_BUFFER_BIT);
 
-    Sphere sphere(1, 32, 32);
+    Sphere sphere(1, 10, 10);
     int const win_width  = 620; // retrieve window dimensions from
     int const win_height = 330; // framework of choice here
     float const win_aspect = (float)win_width / (float)win_height;
@@ -104,8 +109,8 @@ void GLBox::drawSphere() {
     glLoadIdentity();
     gluPerspective(45, win_aspect, 1, 10);
 
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
+//    glMatrixMode(GL_MODELVIEW);
+//    glLoadIdentity();
 
     // Desenha as linhas da esfera (comentar para desenhar esfera sólida)
 //    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);

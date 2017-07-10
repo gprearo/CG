@@ -13,11 +13,11 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
-#include <QtWidgets/QCheckBox>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
+#include <QtWidgets/QRadioButton>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QWidget>
 #include <glbox.h>
@@ -33,9 +33,9 @@ public:
     QAction *actionTabela_de_lados_ativos;
     QWidget *centralwidget;
     GLBox *openGLWidget;
-    QCheckBox *checkBox_Flat;
-    QCheckBox *checkBox_Gouraud;
-    QCheckBox *checkBox_Phong;
+    QRadioButton *radioButton_Flat;
+    QRadioButton *radioButton_Gouraud;
+    QRadioButton *radioButton_Phong;
     QMenuBar *menubar;
     QMenu *menuPreenchimento_de_pol_gonos;
     QStatusBar *statusbar;
@@ -60,15 +60,16 @@ public:
         openGLWidget = new GLBox(centralwidget);
         openGLWidget->setObjectName(QStringLiteral("openGLWidget"));
         openGLWidget->setGeometry(QRect(10, 50, 621, 331));
-        checkBox_Flat = new QCheckBox(centralwidget);
-        checkBox_Flat->setObjectName(QStringLiteral("checkBox_Flat"));
-        checkBox_Flat->setGeometry(QRect(20, 10, 91, 20));
-        checkBox_Gouraud = new QCheckBox(centralwidget);
-        checkBox_Gouraud->setObjectName(QStringLiteral("checkBox_Gouraud"));
-        checkBox_Gouraud->setGeometry(QRect(150, 10, 91, 20));
-        checkBox_Phong = new QCheckBox(centralwidget);
-        checkBox_Phong->setObjectName(QStringLiteral("checkBox_Phong"));
-        checkBox_Phong->setGeometry(QRect(320, 10, 91, 20));
+        radioButton_Flat = new QRadioButton(centralwidget);
+        radioButton_Flat->setObjectName(QStringLiteral("radioButton_Flat"));
+        radioButton_Flat->setGeometry(QRect(10, 10, 106, 20));
+        radioButton_Flat->setChecked(true);
+        radioButton_Gouraud = new QRadioButton(centralwidget);
+        radioButton_Gouraud->setObjectName(QStringLiteral("radioButton_Gouraud"));
+        radioButton_Gouraud->setGeometry(QRect(80, 10, 106, 20));
+        radioButton_Phong = new QRadioButton(centralwidget);
+        radioButton_Phong->setObjectName(QStringLiteral("radioButton_Phong"));
+        radioButton_Phong->setGeometry(QRect(180, 10, 106, 20));
         Principal->setCentralWidget(centralwidget);
         menubar = new QMenuBar(Principal);
         menubar->setObjectName(QStringLiteral("menubar"));
@@ -96,9 +97,9 @@ public:
         actionCor_de_fundo->setText(QApplication::translate("Principal", "Cor &de fundo", 0));
         actionTabela_de_lados->setText(QApplication::translate("Principal", "&Tabela de lados", 0));
         actionTabela_de_lados_ativos->setText(QApplication::translate("Principal", "Tabela &de lados ativos", 0));
-        checkBox_Flat->setText(QApplication::translate("Principal", "Flat", 0));
-        checkBox_Gouraud->setText(QApplication::translate("Principal", "Gouraud", 0));
-        checkBox_Phong->setText(QApplication::translate("Principal", "Phong", 0));
+        radioButton_Flat->setText(QApplication::translate("Principal", "Flat", 0));
+        radioButton_Gouraud->setText(QApplication::translate("Principal", "Gouraud", 0));
+        radioButton_Phong->setText(QApplication::translate("Principal", "Phong", 0));
         menuPreenchimento_de_pol_gonos->setTitle(QApplication::translate("Principal", "&Cores", 0));
     } // retranslateUi
 

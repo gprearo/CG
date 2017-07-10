@@ -24,25 +24,28 @@
      </rect>
     </property>
    </widget>
-   <widget class="QCheckBox" name="checkBox_Flat">
+   <widget class="QRadioButton" name="radioButton_Flat">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>10</x>
       <y>10</y>
-      <width>91</width>
+      <width>106</width>
       <height>20</height>
      </rect>
     </property>
     <property name="text">
      <string>Flat</string>
     </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
    </widget>
-   <widget class="QCheckBox" name="checkBox_Gouraud">
+   <widget class="QRadioButton" name="radioButton_Gouraud">
     <property name="geometry">
      <rect>
-      <x>150</x>
+      <x>80</x>
       <y>10</y>
-      <width>91</width>
+      <width>106</width>
       <height>20</height>
      </rect>
     </property>
@@ -50,12 +53,12 @@
      <string>Gouraud</string>
     </property>
    </widget>
-   <widget class="QCheckBox" name="checkBox_Phong">
+   <widget class="QRadioButton" name="radioButton_Phong">
     <property name="geometry">
      <rect>
-      <x>320</x>
+      <x>180</x>
       <y>10</y>
-      <width>91</width>
+      <width>106</width>
       <height>20</height>
      </rect>
     </property>
