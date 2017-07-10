@@ -40,12 +40,6 @@ void Principal::on_actionCor_de_fundo_triggered() {
         gl->setBgColor(color);
 }
 
-void Principal::on_checkBox_Phong_toggled(bool checked)
-{
-
-}
-
-
 void Principal::keyPressEvent(QKeyEvent *event) {
     if (event->isAutoRepeat()) {
     } else if (event->type() == QEvent::KeyPress) {

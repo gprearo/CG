@@ -28,8 +28,6 @@ private slots:
 
     void on_actionCor_de_fundo_triggered();
 
-    void on_checkBox_Phong_toggled(bool checked);
-
     void on_horizontalSlider_a_valueChanged(int value);
 
     void on_horizontalSlider_b_valueChanged(int value);
