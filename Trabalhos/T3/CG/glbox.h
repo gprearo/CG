@@ -38,6 +38,7 @@ public:
     void setColorB(int value);
     void setColorC(int value);
 
+    void drawPyramid() ;
 
 protected:
 

@@ -95,7 +95,11 @@ void GLBox::paintGL() {
     glMatrixMode(GL_MODELVIEW);
 //    std::cout << fgColor.red() << std::endl;
     drawSphere();
-//    drawCube();
+
+
+    drawCube();
+
+    drawPyramid();
 }
 
 void GLBox::drawSphere() {
@@ -116,6 +120,8 @@ void GLBox::drawSphere() {
     glLoadIdentity();
     gluPerspective(45, win_aspect, 1, 10);
 
+    glTranslatef(0.0f, 0.0f, 0.0f);  // Move left and into the screen
+
     if(model == QColor::Rgb) {
         fgColor.setRgb(colorA, colorB, colorC);
     } else if(model == QColor::Cmyk) {
@@ -132,8 +138,8 @@ void GLBox::drawSphere() {
 }
 
 void GLBox::drawCube() {
-    clearBg(bgColor);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // Clear color and depth buffers
+    //clearBg(bgColor);
+    //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // Clear color and depth buffers
     glMatrixMode(GL_MODELVIEW);     // To operate on model-view matrix
 
      // Render a color-cube consisting of 6 quads with different colors
@@ -146,7 +152,7 @@ void GLBox::drawCube() {
 
     glViewport(0, 0, win_width, win_height);
 
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
@@ -155,58 +161,163 @@ void GLBox::drawCube() {
 //    glMatrixMode(GL_MODELVIEW);
 //    glLoadIdentity();
 
-    glTranslatef(0, 0.0f, -5.0f);  // Move left and into the screen
+    glTranslatef(-2.5f, 0.0f, -5.0f);  // Move left and into the screen
+
+    glEnableClientState(GL_VERTEX_ARRAY);
+    glEnableClientState(GL_NORMAL_ARRAY);
+    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
     glRotatef(rot.x(), 1, 0, 0);
     glRotatef(rot.y(), 0, 1, 0);
     glRotatef(rot.z(), 0, 0, 1);
 //    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
+    if(model == QColor::Rgb) {
+        fgColor.setRgb(colorA, colorB, colorC);
+    } else if(model == QColor::Cmyk) {
+        fgColor.setCmyk(colorA, colorB, colorC, 0);
+    } else if(model == QColor::Hsv) {
+        fgColor.setHsv(colorA, colorB, colorC, 0);
+    }
+
+    fgColor.convertTo(QColor::Rgb);
+
+    glColor3ub(fgColor.red(), fgColor.green(), fgColor.blue());
+
+    // Enable depth test
+    glEnable(GL_DEPTH_TEST);
+    // Accept fragment if it closer to the camera than the former one
+    glDepthFunc(GL_LESS);
+
     glBegin(GL_QUADS);                // Begin drawing the color cube with 6 quads
           // Top face (y = 1.0f)
           // Define vertices in counter-clockwise (CCW) order with normal pointing out
-          glColor3f(0.0f, 1.0f, 0.0f);     // Green
+          //glColor3f(0.0f, 1.0f, 0.0f);     // Green
           glVertex3f( 1.0f, 1.0f, -1.0f);
           glVertex3f(-1.0f, 1.0f, -1.0f);
           glVertex3f(-1.0f, 1.0f,  1.0f);
           glVertex3f( 1.0f, 1.0f,  1.0f);
 
           // Bottom face (y = -1.0f)
-          glColor3f(1.0f, 0.5f, 0.0f);     // Orange
+          //glColor3f(1.0f, 0.5f, 0.0f);     // Orange
           glVertex3f( 1.0f, -1.0f,  1.0f);
           glVertex3f(-1.0f, -1.0f,  1.0f);
           glVertex3f(-1.0f, -1.0f, -1.0f);
           glVertex3f( 1.0f, -1.0f, -1.0f);
 
           // Front face  (z = 1.0f)
-          glColor3f(1.0f, 0.0f, 0.0f);     // Red
+          //glColor3f(1.0f, 0.0f, 0.0f);     // Red
           glVertex3f( 1.0f,  1.0f, 1.0f);
           glVertex3f(-1.0f,  1.0f, 1.0f);
           glVertex3f(-1.0f, -1.0f, 1.0f);
           glVertex3f( 1.0f, -1.0f, 1.0f);
 
           // Back face (z = -1.0f)
-          glColor3f(1.0f, 1.0f, 0.0f);     // Yellow
+          //glColor3f(1.0f, 1.0f, 0.0f);     // Yellow
           glVertex3f( 1.0f, -1.0f, -1.0f);
           glVertex3f(-1.0f, -1.0f, -1.0f);
           glVertex3f(-1.0f,  1.0f, -1.0f);
           glVertex3f( 1.0f,  1.0f, -1.0f);
 
           // Left face (x = -1.0f)
-          glColor3f(0.0f, 0.0f, 1.0f);     // Blue
+          //glColor3f(0.0f, 0.0f, 1.0f);     // Blue
           glVertex3f(-1.0f,  1.0f,  1.0f);
           glVertex3f(-1.0f,  1.0f, -1.0f);
           glVertex3f(-1.0f, -1.0f, -1.0f);
           glVertex3f(-1.0f, -1.0f,  1.0f);
 
           // Right face (x = 1.0f)
-          glColor3f(1.0f, 0.0f, 1.0f);     // Magenta
+          //glColor3f(1.0f, 0.0f, 1.0f);     // Magenta
           glVertex3f(1.0f,  1.0f, -1.0f);
           glVertex3f(1.0f,  1.0f,  1.0f);
           glVertex3f(1.0f, -1.0f,  1.0f);
           glVertex3f(1.0f, -1.0f, -1.0f);
        glEnd();  // End of drawing color-cube
 }
+
+void GLBox::drawPyramid() {
+    //clearBg(bgColor);
+    //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // Clear color and depth buffers
+    glMatrixMode(GL_MODELVIEW);     // To operate on model-view matrix
+
+     // Render a color-cube consisting of 6 quads with different colors
+     glLoadIdentity();                 // Reset the model-view matrix
+
+
+    int const win_width  = 620; // retrieve window dimensions from
+    int const win_height = 330; // framework of choice here
+    float const win_aspect = (float)win_width / (float)win_height;
+
+    glViewport(0, 0, win_width, win_height);
+
+    //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluPerspective(45, win_aspect, 0.1, 10);
+
+//    glMatrixMode(GL_MODELVIEW);
+//    glLoadIdentity();
+
+    glTranslatef(1.8f, 0.0f, -4.0f);  // Move left and into the screen
+
+    glEnableClientState(GL_VERTEX_ARRAY);
+    glEnableClientState(GL_NORMAL_ARRAY);
+    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+
+    glRotatef(rot.x(), 1, 0, 0);
+    glRotatef(rot.y(), 0, 1, 0);
+    glRotatef(rot.z(), 0, 0, 1);
+//    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+    if(model == QColor::Rgb) {
+        fgColor.setRgb(colorA, colorB, colorC);
+    } else if(model == QColor::Cmyk) {
+        fgColor.setCmyk(colorA, colorB, colorC, 0);
+    } else if(model == QColor::Hsv) {
+        fgColor.setHsv(colorA, colorB, colorC, 0);
+    }
+
+    fgColor.convertTo(QColor::Rgb);
+
+    glColor3ub(fgColor.red(), fgColor.green(), fgColor.blue());
+
+    glBegin(GL_QUADS);                // Begin drawing the color cube with 6 quads
+          // Top face (y = 1.0f)
+          // Define vertices in counter-clockwise (CCW) order with normal pointing out
+          //glColor3f(0.0f, 1.0f, 0.0f);     // Green
+          glVertex3f( 0.0f, 0.0f, 0.0f);
+          glVertex3f(1.0f, 0.0f,  0.0f);
+          glVertex3f(1.0f, 0.0f, -1.0f);
+          glVertex3f(0.0f, 0.0f,  -1.0f);
+
+          // Bottom face (y = -1.0f)
+          //glColor3f(1.0f, 0.5f, 0.0f);     // Orange
+          glVertex3f( 0.0f, 0.0f,  0.0f);
+          glVertex3f(0.0f, 0.0f,  -1.0f);
+          glVertex3f(0.5f, 1.0f, -0.5f);
+
+          // Front face  (z = 1.0f)
+          //glColor3f(1.0f, 0.0f, 0.0f);     // Red
+          glVertex3f(0.5f, 1.0f, -0.5f);
+          glVertex3f( 0.0f,  0.0f, 0.0f);
+          glVertex3f(1.0f,  0.0f, 0.0f) ;
+
+          // Back face (z = -1.0f)
+          //glColor3f(1.0f, 1.0f, 0.0f);     // Yellow
+          glVertex3f(0.5f,  1.0f, -0.5f);
+          glVertex3f( 1.0f, 0.0f, -1.0f);
+          glVertex3f(0.0f, 0.0f, -1.0f);
+          glVertex3f(0.5f,  1.0f, -0.5f);
+
+          //glColor3f(1.0f, 1.0f, 0.0f);     // Yellow
+          glVertex3f(0.5f,  1.0f, -0.5f);
+          glVertex3f(1.0f, 0.0f, -1.0f);
+          glVertex3f(1.0f, 0.0f, 0.0f);
+          glVertex3f(0.5f,  1.0f, -0.5f);
+       glEnd();  // End of drawing color-cube
+}
+
 
 void GLBox::draw() {
     this->update();
