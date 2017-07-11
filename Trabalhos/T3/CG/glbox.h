@@ -20,28 +20,17 @@ public:
     virtual ~GLBox();
 
     void draw();
-    void reset();
-
-    void setMode(short mode);
 
     void setBgColor(QColor c);
-    void setFgColor(QColor c);
-    void preencher() ;
-
-    void display();
 
     void rotate(QVector3D ori);
-
 
     void setColorModel(QColor::Spec model);
     void setColorA(int value);
     void setColorB(int value);
     void setColorC(int value);
 
-    void drawPyramid() ;
-
 protected:
-
     QTimer* m_timer; //Timer object for triggering updates
 
     QColor bgColor;
@@ -53,8 +42,6 @@ protected:
 
     QColor::Spec model;
 
-    short mode;
-
     void initializeGL();
 
     void resizeGL(int width, int height);
@@ -62,21 +49,18 @@ protected:
     void paintGL();
 
     void clearBg(QColor c) ;
-    void changeFg(QColor c) ;
 
     void drawVertex();
-    void drawSphere() ;
+    void drawSphere();
     void drawCube();
-    void drawPixel(int x, int y) ;
+    void drawPyramid();
 
 private:
-    int height = 300;
-    int width = 600;
+    int height = 400;
+    int width = 800;
 
     QVector3D rotSpeed;
     QVector3D rot;
-
-    QPolygon poly;
 
 private slots:
     void nextFrame();

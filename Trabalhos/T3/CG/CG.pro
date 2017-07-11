@@ -14,16 +14,12 @@ LIBS += -lglut -lGLU -lGL
 SOURCES += main.cpp \
     glbox.cpp \
     principal.cpp \
-    world.cpp \
-    sphere.cpp \
-    cube.cpp
+    sphere.cpp
 
 HEADERS += \
     glbox.h \
     principal.h \
-    world.h \
-    sphere.h \
-    cube.h
+    sphere.h
 
 FORMS += \
     principal.ui

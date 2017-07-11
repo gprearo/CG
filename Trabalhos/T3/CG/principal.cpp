@@ -9,12 +9,11 @@ Principal::Principal(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    gl = ui->openGLWidget;// new GLBox(ui->openGLWidget) ;
-    //gl->resize(ui->openGLWidget->width(), ui->openGLWidget->height());
+    gl = ui->openGLWidget;
 
     this->setWindowTitle("Trabalho 3 - Modelos de cor");
 
-    // Bloqueia o redimensionamento da janela
+    // Disable windows resizing
     this->setFixedSize(this->width(), this->height());
     this->statusBar()->setSizeGripEnabled(false);
 
@@ -28,22 +27,17 @@ Principal::~Principal() {
     delete ui;
 }
 
-void Principal::on_actionCor_da_linha_triggered() {
-    QColor color = QColorDialog::getColor(Qt::yellow, this);
-    if(color.isValid())
-        gl->setFgColor(color);
-}
-
+// Handle menu change background color
 void Principal::on_actionCor_de_fundo_triggered() {
     QColor color = QColorDialog::getColor(Qt::yellow, this);
     if(color.isValid())
         gl->setBgColor(color);
 }
 
+// Handle hotkeys
 void Principal::keyPressEvent(QKeyEvent *event) {
     if (event->isAutoRepeat()) {
     } else if (event->type() == QEvent::KeyPress) {
-        std::cout << "keypress\n";
         if(event->key() == Qt::Key_W) {
             gl->rotate(QVector3D(0, 0, 1));
         }
@@ -59,10 +53,10 @@ void Principal::keyPressEvent(QKeyEvent *event) {
     }
 }
 
+// Handle hotkeys
 void Principal::keyReleaseEvent(QKeyEvent *event) {
     if (event->isAutoRepeat()) {
     } else if (event->type() == QEvent::KeyRelease) {
-        std::cout << "keyrelease\n";
         if(event->key() == Qt::Key_W) {
             gl->rotate(QVector3D(0, 0, -1));
         }
@@ -78,41 +72,25 @@ void Principal::keyReleaseEvent(QKeyEvent *event) {
     }
 }
 
-void Principal::mouseMoveEvent(QMouseEvent *event) {
-    std::cout << event->x() << ", " << event->y() << std::endl;
-}
-
+// Handle color component A slider
 void Principal::on_horizontalSlider_a_valueChanged(int value) {
     ui->label_a->setText(lblA + QString::number(value));
     gl->setColorA(value);
 }
+
+// Handle color component B slider
 void Principal::on_horizontalSlider_b_valueChanged(int value) {
     ui->label_b->setText(lblB + QString::number(value));
     gl->setColorB(value);
 }
 
+// Handle color component C slider
 void Principal::on_horizontalSlider_c_valueChanged(int value) {
     ui->label_c->setText(lblC + QString::number(value));
     gl->setColorC(value);
 }
 
-
-
-void Principal::on_radioButton_CMY_toggled(bool checked) {
-    if(!checked)
-        return;
-    lblA = "CYAN: ";
-    lblB = "MAGENTA: ";
-    lblC = "YELLOW: ";
-
-    ui->horizontalSlider_a->setMaximum(255);
-    gl->setColorA(ui->horizontalSlider_a->value());
-    ui->label_a->setText(lblA + QString::number(ui->horizontalSlider_a->value()));
-    ui->label_b->setText(lblB + QString::number(ui->horizontalSlider_b->value()));
-    ui->label_c->setText(lblC + QString::number(ui->horizontalSlider_c->value()));
-    gl->setColorModel(QColor::Cmyk);
-}
-
+// Toggle RGB color picker
 void Principal::on_radioButton_RGB_toggled(bool checked) {
     if(!checked)
         return;
@@ -128,6 +106,23 @@ void Principal::on_radioButton_RGB_toggled(bool checked) {
     gl->setColorModel(QColor::Rgb);
 }
 
+// Toggle CMY color picker
+void Principal::on_radioButton_CMY_toggled(bool checked) {
+    if(!checked)
+        return;
+    lblA = "CYAN: ";
+    lblB = "MAGENTA: ";
+    lblC = "YELLOW: ";
+
+    ui->horizontalSlider_a->setMaximum(255);
+    gl->setColorA(ui->horizontalSlider_a->value());
+    ui->label_a->setText(lblA + QString::number(ui->horizontalSlider_a->value()));
+    ui->label_b->setText(lblB + QString::number(ui->horizontalSlider_b->value()));
+    ui->label_c->setText(lblC + QString::number(ui->horizontalSlider_c->value()));
+    gl->setColorModel(QColor::Cmyk);
+}
+
+// Toggle HSV color picker
 void Principal::on_radioButton_HSV_toggled(bool checked) {
     if(!checked)
         return;

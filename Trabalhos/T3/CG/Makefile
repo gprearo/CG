@@ -51,16 +51,12 @@ OBJECTS_DIR   = ./
 SOURCES       = main.cpp \
 		glbox.cpp \
 		principal.cpp \
-		world.cpp \
-		sphere.cpp \
-		cube.cpp moc_glbox.cpp \
+		sphere.cpp moc_glbox.cpp \
 		moc_principal.cpp
 OBJECTS       = main.o \
 		glbox.o \
 		principal.o \
-		world.o \
 		sphere.o \
-		cube.o \
 		moc_glbox.o \
 		moc_principal.o
 DIST          = /usr/lib64/qt5/mkspecs/features/spec_pre.prf \
@@ -208,14 +204,10 @@ DIST          = /usr/lib64/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib64/qt5/mkspecs/features/lex.prf \
 		CG.pro glbox.h \
 		principal.h \
-		world.h \
-		sphere.h \
-		cube.h main.cpp \
+		sphere.h main.cpp \
 		glbox.cpp \
 		principal.cpp \
-		world.cpp \
-		sphere.cpp \
-		cube.cpp
+		sphere.cpp
 QMAKE_TARGET  = CG
 DESTDIR       = 
 TARGET        = CG
@@ -539,8 +531,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib64/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents glbox.h principal.h world.h sphere.h cube.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp glbox.cpp principal.cpp world.cpp sphere.cpp cube.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents glbox.h principal.h sphere.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp glbox.cpp principal.cpp sphere.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents principal.ui $(DISTDIR)/
 
 
@@ -604,9 +596,7 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_ui
 ####### Compile
 
 main.o: main.cpp principal.h \
-		glbox.h \
-		world.h \
-		sphere.h
+		glbox.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 glbox.o: glbox.cpp glbox.h \
@@ -618,15 +608,8 @@ principal.o: principal.cpp principal.h \
 		ui_principal.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o principal.o principal.cpp
 
-world.o: world.cpp world.h \
-		sphere.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o world.o world.cpp
-
 sphere.o: sphere.cpp sphere.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sphere.o sphere.cpp
-
-cube.o: cube.cpp sphere.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o cube.o cube.cpp
 
 moc_glbox.o: moc_glbox.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_glbox.o moc_glbox.cpp

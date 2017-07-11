@@ -5,8 +5,7 @@
 #include <cmath>
 
 
-class Sphere
-{
+class Sphere {
 protected:
     std::vector<GLfloat> vertices;
     std::vector<GLfloat> normals;
