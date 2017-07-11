@@ -33,7 +33,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = CG1.0.0
-DISTDIR = /home/gmomesso/CG/Trabalhos/T2/CG/.tmp/CG1.0.0
+DISTDIR = /home/gmomesso/CG/Trabalhos/T3/CG/.tmp/CG1.0.0
 LINK          = g++
 LFLAGS        = 
 LIBS          = $(SUBLIBS) -lglut -lGLU -lQt5OpenGL -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread 
@@ -52,13 +52,15 @@ SOURCES       = main.cpp \
 		glbox.cpp \
 		principal.cpp \
 		world.cpp \
-		sphere.cpp moc_glbox.cpp \
+		sphere.cpp \
+		cube.cpp moc_glbox.cpp \
 		moc_principal.cpp
 OBJECTS       = main.o \
 		glbox.o \
 		principal.o \
 		world.o \
 		sphere.o \
+		cube.o \
 		moc_glbox.o \
 		moc_principal.o
 DIST          = /usr/lib64/qt5/mkspecs/features/spec_pre.prf \
@@ -207,11 +209,13 @@ DIST          = /usr/lib64/qt5/mkspecs/features/spec_pre.prf \
 		CG.pro glbox.h \
 		principal.h \
 		world.h \
-		sphere.h main.cpp \
+		sphere.h \
+		cube.h main.cpp \
 		glbox.cpp \
 		principal.cpp \
 		world.cpp \
-		sphere.cpp
+		sphere.cpp \
+		cube.cpp
 QMAKE_TARGET  = CG
 DESTDIR       = 
 TARGET        = CG
@@ -535,8 +539,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib64/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents glbox.h principal.h world.h sphere.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp glbox.cpp principal.cpp world.cpp sphere.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents glbox.h principal.h world.h sphere.h cube.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp glbox.cpp principal.cpp world.cpp sphere.cpp cube.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents principal.ui $(DISTDIR)/
 
 
@@ -573,12 +577,12 @@ compiler_moc_header_clean:
 	-$(DEL_FILE) moc_glbox.cpp moc_principal.cpp
 moc_glbox.cpp: glbox.h \
 		moc_predefs.h
-	/usr/lib64/qt5/bin/moc $(DEFINES) --include ./moc_predefs.h -I/usr/lib64/qt5/mkspecs/linux-g++ -I/home/gmomesso/CG/Trabalhos/T2/CG -I/usr/include/qt5 -I/usr/include/qt5/QtOpenGL -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtCore -I/usr/include/c++/6.3.1 -I/usr/include/c++/6.3.1/x86_64-redhat-linux -I/usr/include/c++/6.3.1/backward -I/usr/lib/gcc/x86_64-redhat-linux/6.3.1/include -I/usr/local/include -I/usr/include glbox.h -o moc_glbox.cpp
+	/usr/lib64/qt5/bin/moc $(DEFINES) --include ./moc_predefs.h -I/usr/lib64/qt5/mkspecs/linux-g++ -I/home/gmomesso/CG/Trabalhos/T3/CG -I/usr/include/qt5 -I/usr/include/qt5/QtOpenGL -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtCore -I/usr/include/c++/6.3.1 -I/usr/include/c++/6.3.1/x86_64-redhat-linux -I/usr/include/c++/6.3.1/backward -I/usr/lib/gcc/x86_64-redhat-linux/6.3.1/include -I/usr/local/include -I/usr/include glbox.h -o moc_glbox.cpp
 
 moc_principal.cpp: glbox.h \
 		principal.h \
 		moc_predefs.h
-	/usr/lib64/qt5/bin/moc $(DEFINES) --include ./moc_predefs.h -I/usr/lib64/qt5/mkspecs/linux-g++ -I/home/gmomesso/CG/Trabalhos/T2/CG -I/usr/include/qt5 -I/usr/include/qt5/QtOpenGL -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtCore -I/usr/include/c++/6.3.1 -I/usr/include/c++/6.3.1/x86_64-redhat-linux -I/usr/include/c++/6.3.1/backward -I/usr/lib/gcc/x86_64-redhat-linux/6.3.1/include -I/usr/local/include -I/usr/include principal.h -o moc_principal.cpp
+	/usr/lib64/qt5/bin/moc $(DEFINES) --include ./moc_predefs.h -I/usr/lib64/qt5/mkspecs/linux-g++ -I/home/gmomesso/CG/Trabalhos/T3/CG -I/usr/include/qt5 -I/usr/include/qt5/QtOpenGL -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtCore -I/usr/include/c++/6.3.1 -I/usr/include/c++/6.3.1/x86_64-redhat-linux -I/usr/include/c++/6.3.1/backward -I/usr/lib/gcc/x86_64-redhat-linux/6.3.1/include -I/usr/local/include -I/usr/include principal.h -o moc_principal.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -620,6 +624,9 @@ world.o: world.cpp world.h \
 
 sphere.o: sphere.cpp sphere.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sphere.o sphere.cpp
+
+cube.o: cube.cpp sphere.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o cube.o cube.cpp
 
 moc_glbox.o: moc_glbox.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_glbox.o moc_glbox.cpp

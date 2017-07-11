@@ -15,13 +15,15 @@ SOURCES += main.cpp \
     glbox.cpp \
     principal.cpp \
     world.cpp \
-    sphere.cpp
+    sphere.cpp \
+    cube.cpp
 
 HEADERS += \
     glbox.h \
     principal.h \
     world.h \
-    sphere.h
+    sphere.h \
+    cube.h
 
 FORMS += \
     principal.ui
