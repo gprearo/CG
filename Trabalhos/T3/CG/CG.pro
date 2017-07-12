@@ -9,7 +9,7 @@ CONFIG -= app_bundle
 
 TEMPLATE = app
 
-LIBS += -lglut -lGLU -lGL
+LIBS += -L"C:\freeglut\lib" -lglut -lopengl32
 
 SOURCES += main.cpp \
     glbox.cpp \

@@ -5,9 +5,16 @@
 #include <GL/glut.h>
 #include <QGLWidget>
 
+// Constants
 int const win_width  = 800; // OpenGL frame width
 int const win_height = 400; // OpenGL frame height
 float const win_aspect = (float)win_width / (float)win_height; // OpenGL frame aspect ratio
+float fieldOfView = 45.0;
+GLfloat zNear = 0.1f;
+GLfloat zFar = 10.0f;
+GLfloat aspect = win_aspect;//float(width)/float(height);
+GLfloat fH = tan( float(fieldOfView / 360.0f * 3.14159f) ) * zNear;
+GLfloat fW = fH * aspect;
 
 GLBox::GLBox(QWidget *parent) : QOpenGLWidget(parent) {
     //setup timer
@@ -126,7 +133,9 @@ void GLBox::drawSphere() {
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(45, win_aspect, 1, 10);
+//    gluPerspective(45, win_aspect, 1, 10);
+
+    glFrustum( -fW, fW, -fH, fH, zNear, zFar );
 
     glTranslatef(0.0f, 0.0f, 0.0f);  // Move left and into the screen
 
@@ -160,7 +169,9 @@ void GLBox::drawCube() {
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(45, win_aspect, 0.1, 10);
+//    gluPerspective(45, win_aspect, 0.1, 10);
+
+    glFrustum( -fW, fW, -fH, fH, zNear, zFar );
 
     /* Translate the object */
     glTranslatef(-3.5f, 0.0f, -7.0f);  // Move left and into the screen
@@ -271,7 +282,9 @@ void GLBox::drawCube() {
 void GLBox::drawPyramid() {
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(45, win_aspect, 0.1, 10);
+//    gluPerspective(45, win_aspect, 0.1, 10);
+
+    glFrustum( -fW, fW, -fH, fH, zNear, zFar );
 
     /* Translate the object */
     glTranslatef(1.8f, 0.0f, -4.0f);
